@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Example, Startup } from '@/screens';
 import { useTheme } from '@/theme';
 
+import AccountList from '@/screens/account-list/account-list';
 import type { RootStackParamList } from '@/types/navigation';
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -16,6 +17,7 @@ function ApplicationNavigator() {
     <SafeAreaProvider>
       <NavigationContainer theme={navigationTheme}>
         <Stack.Navigator key={variant} screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="AccountList" component={AccountList} />
           <Stack.Screen name="Startup" component={Startup} />
           <Stack.Screen name="Example" component={Example} />
         </Stack.Navigator>
