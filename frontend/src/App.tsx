@@ -4,6 +4,9 @@ import { MMKV } from 'react-native-mmkv';
 
 import { ThemeProvider } from '@/theme';
 
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import ApplicationNavigator from './navigators/Application';
 import './translations';
 
@@ -15,7 +18,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider storage={storage}>
-        <ApplicationNavigator />
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider {...eva} theme={eva.light}>
+          <ApplicationNavigator />
+        </ApplicationProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );
