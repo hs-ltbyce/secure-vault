@@ -1,6 +1,7 @@
 {
-  "name": "key-master",
+  "name": "secure-vault",
   "version": "1.0.0",
+  "description": "Secure Vault,your password manager",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
