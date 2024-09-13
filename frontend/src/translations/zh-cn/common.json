@@ -1,4 +1,7 @@
 {
+  "appName": "安密库",
+  "appNameDesc": "安密库，您的密码管家",
+  "empty": "暂无数据",
   "keyList": {
     "title": "列表"
   }

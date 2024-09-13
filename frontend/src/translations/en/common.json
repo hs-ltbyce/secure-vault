@@ -1,4 +1,7 @@
 {
+  "appName": "Secure Vault",
+  "appNameDesc": "Secure Vault,your password manager",
+  "empty": "No data available",
   "keyList": {
     "title": "List"
   }

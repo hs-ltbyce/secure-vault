@@ -3,45 +3,65 @@ import Empty from '@/components/common/empty';
 import { MenuIcon, PlusIcon } from '@/components/icons/icons';
 import { mockAccountList } from '@/data/mock/account';
 import { Account as AccountInfo } from '@/types/schemas/account';
-import { Text, useTheme } from '@ui-kitten/components';
+import { TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import { TouchableWebElement } from '@ui-kitten/components/devsupport';
 import { useEffect, useState } from 'react';
-import { FlatList, SafeAreaView, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
 
 function AccountList() {
+  const { t } = useTranslation(['common']);
   const [accountList, setAccountList] = useState<AccountInfo[]>([]);
-  const theme = useTheme();
+
+  const renderRightActions = (): TouchableWebElement => (
+    <TopNavigationAction icon={PlusIcon} />
+  );
+
+  const renderMenuAction = (): TouchableWebElement => (
+    <TopNavigationAction icon={MenuIcon} />
+  );
 
   useEffect(() => {
-    setAccountList(mockAccountList(20));
+    setAccountList(mockAccountList(10));
   }, []);
 
   return (
-    <SafeAreaView>
-      <View>
-        <View
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            alignContent: 'center',
-            backgroundColor: theme.background,
-            padding: 16,
-          }}
-        >
-          <MenuIcon height={28} style={{ width: 60 }} />
-          <Text category="h6" style={{ width: 60 }}>
-            列表
-          </Text>
-          <PlusIcon height={28} style={{ width: 60 }} />
-        </View>
-        <FlatList
-          data={accountList}
-          renderItem={({ item }) => <Account account={item} />}
-          ListEmptyComponent={<Empty />}
-        />
-      </View>
+    <SafeAreaView style={styles.container}>
+      <TopNavigation
+        title={t('keyList.title')}
+        style={styles.topNavigation}
+        alignment="center"
+        accessoryLeft={renderMenuAction}
+        accessoryRight={renderRightActions}
+      />
+      <FlatList
+        contentContainerStyle={
+          accountList.length === 0 ? styles.listEmpty : null
+        }
+        data={accountList}
+        renderItem={({ item }) => (
+          <Account style={styles.account} account={item} />
+        )}
+        ListEmptyComponent={<Empty />}
+      />
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  topNavigation: {
+    backgroundColor: 'transparent',
+  },
+  listEmpty: {
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
+  account: {
+    marginTop: 8,
+  },
+});
 
 export default AccountList;
