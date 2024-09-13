@@ -6,3 +6,14 @@ export function MenuIcon(props: IconProps) {
 export function PlusIcon(props: IconProps) {
   return <Icon name="plus" {...props} />;
 }
+
+export function EmptyIcon(props: IconProps) {
+  return (
+    <Icon
+      style={{ width: 100, height: 100, ...props.style }}
+      name="empty"
+      pack="assets"
+      {...props}
+    />
+  );
+}
