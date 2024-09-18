@@ -13,8 +13,8 @@ import Animated, {
 } from 'react-native-reanimated';
 
 interface Props {
-  open: boolean;
-  onClose: () => void;
+  open?: boolean;
+  onClose?: () => void;
   children: React.ReactNode;
   style?: ViewStyle;
   duration?: number;
@@ -50,7 +50,7 @@ function Drawer(props: Props) {
   return (
     <>
       <Animated.View style={[styles.backdrop, backdropStyle]}>
-        <TouchableOpacity style={styles.flex} onPress={() => onClose()} />
+        <TouchableOpacity style={styles.flex} onPress={() => onClose?.()} />
       </Animated.View>
       <Animated.View
         onLayout={(e) => {
@@ -74,8 +74,6 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     zIndex: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: 'white',
   },
   backdrop: {
