@@ -11,7 +11,7 @@
     "test": "jest",
     "type-check": "tsc",
     "test:report": "jest --collectCoverage --coverageDirectory=\"./coverage\" --ci --reporters=default --reporters=jest-junit --coverage",
-    "pod-install": "cd ios && pod install && cd ..",
+    "pod-install": "cd ios && RCT_NEW_ARCH_ENABLED=1 bundle exec pod install && cd ..",
     "postinstall": "npx patch-package",
     "prettier": "prettier --write 'src/**/*.{ts,tsx}'"
   },
@@ -29,7 +29,7 @@
     "react-i18next": "^14.1.0",
     "react-native": "0.74.1",
     "react-native-gesture-handler": "^2.16.0",
-    "react-native-mmkv": "^2.12.2",
+    "react-native-mmkv": "3.0.1",
     "react-native-reanimated": "^3.15.2",
     "react-native-safe-area-context": "^4.10.1",
     "react-native-screens": "3.31.1",
