@@ -17,3 +17,7 @@ export function EmptyIcon(props: IconProps) {
     />
   );
 }
+
+export function SettingIcon(props: IconProps) {
+  return <Icon name="settings-outline" {...props} />;
+}

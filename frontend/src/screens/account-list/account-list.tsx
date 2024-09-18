@@ -8,17 +8,19 @@ import { TouchableWebElement } from '@ui-kitten/components/devsupport';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
+import { useMMKVBoolean } from 'react-native-mmkv';
 
 function AccountList() {
   const { t } = useTranslation(['common']);
   const [accountList, setAccountList] = useState<AccountInfo[]>([]);
+  const [, setOpen] = useMMKVBoolean('drawerMenu.open');
 
   const renderRightActions = (): TouchableWebElement => (
     <TopNavigationAction icon={PlusIcon} />
   );
 
   const renderMenuAction = (): TouchableWebElement => (
-    <TopNavigationAction icon={MenuIcon} />
+    <TopNavigationAction icon={MenuIcon} onPress={() => setOpen(true)} />
   );
 
   useEffect(() => {

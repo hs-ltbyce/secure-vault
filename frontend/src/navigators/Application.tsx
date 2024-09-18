@@ -6,6 +6,7 @@ import { Example, Startup } from '@/screens';
 import { useTheme } from '@/theme';
 
 import AccountList from '@/screens/account-list/account-list';
+import DrawerMenu from '@/screens/drawer-menu/drawer-menu';
 import type { RootStackParamList } from '@/types/navigation';
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -21,6 +22,7 @@ function ApplicationNavigator() {
           <Stack.Screen name="Startup" component={Startup} />
           <Stack.Screen name="Example" component={Example} />
         </Stack.Navigator>
+        <DrawerMenu />
       </NavigationContainer>
     </SafeAreaProvider>
   );
