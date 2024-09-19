@@ -4,6 +4,7 @@ export type RootStackParamList = {
   AccountList: undefined;
   Startup: undefined;
   Example: undefined;
+  Setting: undefined;
 };
 
 export type RootScreenProps<

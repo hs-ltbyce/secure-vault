@@ -4,5 +4,8 @@
   "empty": "No data available",
   "keyList": {
     "title": "List"
+  },
+  "screenTitle": {
+    "setting": "Setting"
   }
 }

@@ -1,7 +1,7 @@
 import { Icon, IconProps } from '@ui-kitten/components';
 
 export function MenuIcon(props: IconProps) {
-  return <Icon name="menu-outline" {...props} />;
+  return <Icon name="menu" {...props} />;
 }
 export function PlusIcon(props: IconProps) {
   return <Icon name="plus" {...props} />;
@@ -19,5 +19,9 @@ export function EmptyIcon(props: IconProps) {
 }
 
 export function SettingIcon(props: IconProps) {
-  return <Icon name="settings-outline" {...props} />;
+  return <Icon name="settings" {...props} />;
+}
+
+export function BackIcon(props: IconProps) {
+  return <Icon name="arrow-back" {...props} />;
 }

@@ -4,5 +4,8 @@
   "empty": "暂无数据",
   "keyList": {
     "title": "列表"
+  },
+  "screenTitle": {
+    "setting": "设置"
   }
 }
