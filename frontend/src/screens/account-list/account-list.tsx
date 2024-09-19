@@ -1,9 +1,10 @@
 import Account from '@/components/account-list/account';
 import Empty from '@/components/common/empty';
 import { MenuIcon, PlusIcon } from '@/components/icons/icons';
+import ScreenTopNavigation from '@/components/screen-top-navigation/screen-top-navigation';
 import { mockAccountList } from '@/data/mock/account';
 import { Account as AccountInfo } from '@/types/schemas/account';
-import { TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import { TopNavigationAction } from '@ui-kitten/components';
 import { TouchableWebElement } from '@ui-kitten/components/devsupport';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -29,9 +30,8 @@ function AccountList() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TopNavigation
+      <ScreenTopNavigation
         title={t('keyList.title')}
-        style={styles.topNavigation}
         alignment="center"
         accessoryLeft={renderMenuAction}
         accessoryRight={renderRightActions}
@@ -53,9 +53,6 @@ function AccountList() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  topNavigation: {
-    backgroundColor: 'transparent',
   },
   listEmpty: {
     flexGrow: 1,
