@@ -25,3 +25,15 @@ export function SettingIcon(props: IconProps) {
 export function BackIcon(props: IconProps) {
   return <Icon name="arrow-back" {...props} />;
 }
+
+export function ArrowIOSBackIcon(props: IconProps) {
+  return <Icon name="arrow-ios-back" {...props} />;
+}
+
+export function ArrowIOSForwardIcon(props: IconProps) {
+  return <Icon name="arrow-ios-forward" {...props} />;
+}
+
+export function BellIcon(props: IconProps) {
+  return <Icon name="bell-outline" {...props} />;
+}

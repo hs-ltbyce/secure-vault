@@ -5,7 +5,24 @@
   "keyList": {
     "title": "List"
   },
-  "screenTitle": {
-    "setting": "Setting"
+  "setting": {
+    "title": "Setting"
+  },
+  "generalSetting": {
+    "title": "General Setting",
+    "display": "Display",
+    "languages": "Languages",
+    "darkMode": "Dark Mode"
+  },
+  "notificationSetting": {
+    "title": "Notification Setting"
+  },
+  "languageSetting": {
+    "title": "Select Language",
+    "zh-cn": "简体中文",
+    "en": "English"
+  },
+  "darkModeSetting": {
+    "title": "Dark Mode"
   }
 }

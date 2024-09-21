@@ -5,7 +5,24 @@
   "keyList": {
     "title": "列表"
   },
-  "screenTitle": {
-    "setting": "设置"
+  "setting": {
+    "title": "设置"
+  },
+  "generalSetting": {
+    "title": "通用设置",
+    "display": "显示",
+    "languages": "多语言",
+    "darkMode": "深色模式"
+  },
+  "notificationSetting": {
+    "title": "通知设置"
+  },
+  "languageSetting": {
+    "title": "选择语言",
+    "zh-cn": "简体中文",
+    "en": "English"
+  },
+  "darkModeSetting": {
+    "title": "深色模式"
   }
 }
