@@ -5,6 +5,9 @@ export type RootStackParamList = {
   Startup: undefined;
   Example: undefined;
   Setting: undefined;
+  GeneralSetting: undefined;
+  LanguageSetting: undefined;
+  DarkModeSetting: undefined;
 };
 
 export type RootScreenProps<
