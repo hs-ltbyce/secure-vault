@@ -44,7 +44,7 @@ function AccountList() {
         renderItem={({ item }) => (
           <Account style={styles.account} account={item} />
         )}
-        ListEmptyComponent={<Empty />}
+        ListEmptyComponent={<Empty style={styles.empty} />}
       />
     </SafeAreaView>
   );
@@ -60,6 +60,9 @@ const styles = StyleSheet.create({
   },
   account: {
     marginTop: 8,
+  },
+  empty: {
+    marginBottom: 64,
   },
 });
 

@@ -8,6 +8,6 @@ const IconProvider = (source: ImageSourcePropType) => ({
 export const AssetIconsPack = {
   name: 'assets',
   icons: {
-    empty: IconProvider(require('@/assets/images/empty.png')),
+    empty: IconProvider(require('@/theme/assets/images/empty.png')),
   },
 };

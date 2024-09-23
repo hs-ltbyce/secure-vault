@@ -1,16 +1,25 @@
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import { StyleProp, Text, View, ViewStyle } from 'react-native';
 import { EmptyIcon } from '../icons/icons';
 
-function Empty(props: { description?: ReactNode }) {
+interface Props {
+  description?: ReactNode;
+  style?: StyleProp<ViewStyle>;
+}
+
+function Empty(props: Props) {
   const { t } = useTranslation(['common']);
   return (
     <View
-      style={{
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
+      style={[
+        {
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingBottom: 40,
+        },
+        props.style,
+      ]}
     >
       <EmptyIcon />
       <Text>{props.description ?? t('common:empty')}</Text>
@@ -19,3 +28,4 @@ function Empty(props: { description?: ReactNode }) {
 }
 
 export default Empty;
+
