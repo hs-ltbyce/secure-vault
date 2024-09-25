@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import 'react-native-gesture-handler';
-import { MMKV } from 'react-native-mmkv';
 
 import { ThemeProvider } from '@/theme';
 
@@ -9,11 +8,10 @@ import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { AssetIconsPack } from './components/icons/asset-icon';
 import ApplicationNavigator from './navigators/Application';
+import { storage } from './storage/storage';
 import './translations';
 
 export const queryClient = new QueryClient();
-
-export const storage = new MMKV();
 
 function App() {
   return (
