@@ -1,8 +1,8 @@
-import GroupMenu from '@/components/group-menu/group-menu';
 import {
   ArrowIOSBackIcon,
   ArrowIOSForwardIcon,
 } from '@/components/icons/icons';
+import ListGroup from '@/components/list-group/list-group';
 import ScreenTopNavigation from '@/components/screen-top-navigation/screen-top-navigation';
 import { RootStackParamList } from '@/types/navigation';
 import { useNavigation } from '@react-navigation/native';
@@ -26,20 +26,17 @@ function GeneralSetting() {
           />
         )}
       />
-      <GroupMenu
+      <ListGroup
         items={[
           {
-            key: 'display',
             title: t('generalSetting.display'),
             items: [
               {
-                key: 'language',
                 title: t('generalSetting.languages'),
                 accessoryRight: ArrowIOSForwardIcon,
                 onPress: () => navigation.navigate('LanguageSetting'),
               },
               {
-                key: 'darkMode',
                 title: t('generalSetting.darkMode'),
                 accessoryRight: ArrowIOSForwardIcon,
                 onPress: () => navigation.navigate('DarkModeSetting'),

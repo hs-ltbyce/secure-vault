@@ -1,10 +1,10 @@
-import GroupMenu from '@/components/group-menu/group-menu';
 import {
   ArrowIOSBackIcon,
   ArrowIOSForwardIcon,
   BellIcon,
   SettingIcon,
 } from '@/components/icons/icons';
+import ListGroup from '@/components/list-group/list-group';
 import ScreenTopNavigation from '@/components/screen-top-navigation/screen-top-navigation';
 import { RootStackParamList } from '@/types/navigation';
 import { useNavigation } from '@react-navigation/native';
@@ -28,20 +28,17 @@ function Setting() {
           />
         )}
       />
-      <GroupMenu
+      <ListGroup
         items={[
           {
-            key: '1',
             items: [
               {
-                key: 'general',
                 title: t('generalSetting.title'),
                 accessoryLeft: SettingIcon,
                 accessoryRight: ArrowIOSForwardIcon,
                 onPress: () => navigation.navigate('GeneralSetting'),
               },
               {
-                key: 'notification',
                 title: t('notificationSetting.title'),
                 accessoryLeft: BellIcon,
                 accessoryRight: ArrowIOSForwardIcon,
