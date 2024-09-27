@@ -23,6 +23,8 @@
     "en": "English"
   },
   "darkModeSetting": {
-    "title": "深色模式"
+    "title": "深色模式",
+    "followSystem": "跟随系统设置",
+    "followSystemDesc": "开启后根据系统设置同步切换深/浅模式"
   }
 }

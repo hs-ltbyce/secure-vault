@@ -23,6 +23,8 @@
     "en": "English"
   },
   "darkModeSetting": {
-    "title": "Dark Mode"
+    "title": "Dark Mode",
+    "followSystem": "Follow the system settings",
+    "followSystemDesc": "After enabling, switch between the dark/light mode synchronously according to the system settings"
   }
 }
