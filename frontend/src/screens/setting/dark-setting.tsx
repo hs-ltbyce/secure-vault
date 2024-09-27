@@ -2,10 +2,10 @@ import { ArrowIOSBackIcon } from '@/components/icons/icons';
 import ListGroup from '@/components/list-group/list-group';
 import ScreenTopNavigation from '@/components/screen-top-navigation/screen-top-navigation';
 import { useTheme } from '@/theme';
+import ScreenView from '@/theme/screen-view';
 import { useNavigation } from '@react-navigation/native';
 import { Toggle, TopNavigationAction } from '@ui-kitten/components';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaView } from 'react-native';
 
 function DarkModeSetting() {
   const navigation = useNavigation();
@@ -13,7 +13,7 @@ function DarkModeSetting() {
   const { theme, changeTheme } = useTheme();
 
   return (
-    <SafeAreaView>
+    <ScreenView>
       <ScreenTopNavigation
         alignment="center"
         title={t('darkModeSetting.title')}
@@ -63,7 +63,7 @@ function DarkModeSetting() {
           },
         ]}
       />
-    </SafeAreaView>
+    </ScreenView>
   );
 }
 

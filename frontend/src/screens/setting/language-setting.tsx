@@ -1,10 +1,10 @@
 import { ArrowIOSBackIcon } from '@/components/icons/icons';
 import ListGroup from '@/components/list-group/list-group';
 import ScreenTopNavigation from '@/components/screen-top-navigation/screen-top-navigation';
+import ScreenView from '@/theme/screen-view';
 import { useNavigation } from '@react-navigation/native';
 import { TopNavigationAction } from '@ui-kitten/components';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaView } from 'react-native';
 import { useMMKVString } from 'react-native-mmkv';
 
 function LanguageSetting() {
@@ -12,7 +12,7 @@ function LanguageSetting() {
   const { t } = useTranslation(['common']);
   const [, setLanguage] = useMMKVString('language');
   return (
-    <SafeAreaView>
+    <ScreenView>
       <ScreenTopNavigation
         alignment="center"
         title={t('languageSetting.title')}
@@ -43,7 +43,7 @@ function LanguageSetting() {
           },
         ]}
       />
-    </SafeAreaView>
+    </ScreenView>
   );
 }
 

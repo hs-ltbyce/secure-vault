@@ -1,7 +1,12 @@
-import { TopNavigation, TopNavigationProps } from '@ui-kitten/components';
-import { StyleSheet } from 'react-native';
+import {
+  StyleService,
+  TopNavigation,
+  TopNavigationProps,
+  useStyleSheet,
+} from '@ui-kitten/components';
 
 function ScreenTopNavigation({ ...topNavigationProps }: TopNavigationProps) {
+  const styles = useStyleSheet(themedStyles);
   return (
     <TopNavigation
       {...topNavigationProps}
@@ -10,9 +15,9 @@ function ScreenTopNavigation({ ...topNavigationProps }: TopNavigationProps) {
   );
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   topNavigation: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'background-basic-color-4',
   },
 });
 

@@ -3,12 +3,13 @@ import Empty from '@/components/common/empty';
 import { MenuIcon, PlusIcon } from '@/components/icons/icons';
 import ScreenTopNavigation from '@/components/screen-top-navigation/screen-top-navigation';
 import { mockAccountList } from '@/data/mock/account';
+import ScreenView from '@/theme/screen-view';
 import { Account as AccountInfo } from '@/types/schemas/account';
 import { TopNavigationAction } from '@ui-kitten/components';
 import { TouchableWebElement } from '@ui-kitten/components/devsupport';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { useMMKVBoolean } from 'react-native-mmkv';
 
 function AccountList() {
@@ -29,7 +30,7 @@ function AccountList() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScreenView>
       <ScreenTopNavigation
         title={t('keyList.title')}
         alignment="center"
@@ -46,14 +47,11 @@ function AccountList() {
         )}
         ListEmptyComponent={<Empty style={styles.empty} />}
       />
-    </SafeAreaView>
+    </ScreenView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   listEmpty: {
     flexGrow: 1,
     justifyContent: 'center',

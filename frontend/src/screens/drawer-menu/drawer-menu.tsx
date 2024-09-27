@@ -3,13 +3,19 @@ import { SettingIcon } from '@/components/icons/icons';
 import { RootStackParamList } from '@/types/navigation';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { Menu, MenuItem } from '@ui-kitten/components';
+import {
+  Menu,
+  MenuItem,
+  StyleService,
+  useStyleSheet,
+} from '@ui-kitten/components';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet } from 'react-native';
 import { useMMKVBoolean } from 'react-native-mmkv';
 
 function DrawerMenu() {
   const { t } = useTranslation('common');
+  const styles = useStyleSheet(themedStyles);
+
   const [open, setOpen] = useMMKVBoolean('drawerMenu.open');
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
@@ -26,17 +32,18 @@ function DrawerMenu() {
   );
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   container: {
     width: '60%',
+    backgroundColor: 'background-basic-color-1',
   },
   menu: {
     top: 40,
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: 'background-basic-color-1',
   },
 });
 
