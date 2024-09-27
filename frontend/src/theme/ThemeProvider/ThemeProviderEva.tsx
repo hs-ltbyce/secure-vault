@@ -1,7 +1,8 @@
 import * as material from '@eva-design/material';
 import { ApplicationProvider } from '@ui-kitten/components';
 import { createContext, useEffect, useState } from 'react';
-import { MMKV } from 'react-native-mmkv';
+import { Appearance } from 'react-native';
+import { MMKV, useMMKVBoolean } from 'react-native-mmkv';
 
 type Theme = 'light' | 'dark';
 
@@ -27,6 +28,12 @@ function ThemeProviderEva({
   const [theme, setTheme] = useState(
     (storage.getString('theme') as Theme) || DEFAULT_THEME,
   );
+  const [useSystemTheme] = useMMKVBoolean('useSystemTheme');
+
+  const changeTheme = (nextTheme: Theme) => {
+    setTheme(nextTheme);
+    storage.set('theme', nextTheme);
+  };
 
   // Initialize theme at DEFAULT_THEME if not defined
   useEffect(() => {
@@ -37,10 +44,12 @@ function ThemeProviderEva({
     }
   }, []);
 
-  const changeTheme = (nextTheme: Theme) => {
-    setTheme(nextTheme);
-    storage.set('theme', nextTheme);
-  };
+  useEffect(() => {
+    if (useSystemTheme) {
+      const systemTheme = Appearance.getColorScheme();
+      changeTheme(systemTheme ?? DEFAULT_THEME);
+    }
+  }, [useSystemTheme]);
 
   return (
     <ThemeContext.Provider value={{ theme, changeTheme }}>
