@@ -7,7 +7,7 @@ import { Divider, List, ListItem, Text } from '@ui-kitten/components';
 import { StyleSheet, View } from 'react-native';
 
 interface IListItem {
-  title: string;
+  title: RenderTextElement;
   accessoryLeft?: RenderAccessoryLeft;
   accessoryRight?: RenderAccessoryRight;
   description?: RenderTextElement;
@@ -15,7 +15,7 @@ interface IListItem {
 }
 
 export type ListGroupItem = {
-  title?: string;
+  title?: RenderTextElement;
   items: IListItem[];
 };
 
@@ -37,10 +37,15 @@ function ListGroup({ items }: Props) {
     <View>
       {items.map((group) => (
         <View style={styles.group}>
-          {group.title && (
+          {typeof group.title === 'string' ||
+          typeof group.title === 'number' ? (
             <Text style={styles.groupTitle} category="p2">
               {group.title}
             </Text>
+          ) : typeof group.title === 'function' ? (
+            group.title()
+          ) : (
+            group.title
           )}
           {
             <List
@@ -66,7 +71,7 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
   },
   list: {
-    borderRadius: 12,
+    borderRadius: 8,
   },
 });
 
