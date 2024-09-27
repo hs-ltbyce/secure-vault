@@ -24,7 +24,7 @@ function DarkModeSetting() {
     const systemTheme = Appearance.getColorScheme();
     if (systemTheme !== nextTheme && nextTheme === 'dark')
       setUseSystemTheme(false);
-    changeTheme(checked ? 'dark' : 'light');
+    changeTheme(nextTheme);
   };
 
   return (
