@@ -27,8 +27,10 @@ function DarkModeSetting() {
       <ListGroup
         items={[
           {
+            key: 'darkModeSetting',
             items: [
               {
+                key: 'darkMode',
                 title: t('darkModeSetting.title'),
                 accessoryRight: (
                   <Toggle
@@ -43,8 +45,10 @@ function DarkModeSetting() {
             ],
           },
           {
+            key: 'system',
             items: [
               {
+                key: 'followSystem',
                 title: t('darkModeSetting.followSystem'),
                 description: t('darkModeSetting.followSystemDesc'),
                 accessoryRight: (

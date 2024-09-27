@@ -31,14 +31,17 @@ function Setting() {
       <ListGroup
         items={[
           {
+            key: 'setting',
             items: [
               {
+                key: 'general',
                 title: t('generalSetting.title'),
                 accessoryLeft: SettingIcon,
                 accessoryRight: ArrowIOSForwardIcon,
                 onPress: () => navigation.navigate('GeneralSetting'),
               },
               {
+                key: 'notification',
                 title: t('notificationSetting.title'),
                 accessoryLeft: BellIcon,
                 accessoryRight: ArrowIOSForwardIcon,

@@ -26,13 +26,16 @@ function LanguageSetting() {
       <ListGroup
         items={[
           {
+            key: 'language',
             title: t('languageSetting.title'),
             items: [
               {
+                key: 'zh-cn',
                 title: t('languageSetting.zh-cn'),
                 onPress: () => setLanguage('zh-cn'),
               },
               {
+                key: 'en',
                 title: t('languageSetting.en'),
                 onPress: () => setLanguage('en'),
               },

@@ -29,14 +29,17 @@ function GeneralSetting() {
       <ListGroup
         items={[
           {
+            key: 'display',
             title: t('generalSetting.display'),
             items: [
               {
+                key: 'languages',
                 title: t('generalSetting.languages'),
                 accessoryRight: ArrowIOSForwardIcon,
                 onPress: () => navigation.navigate('LanguageSetting'),
               },
               {
+                key: 'darkMode',
                 title: t('generalSetting.darkMode'),
                 accessoryRight: ArrowIOSForwardIcon,
                 onPress: () => navigation.navigate('DarkModeSetting'),
