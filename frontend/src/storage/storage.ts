@@ -1,11 +1,12 @@
 import { Platform } from 'react-native';
 import RNFS from 'react-native-fs';
 import { MMKV } from 'react-native-mmkv';
+import pkgJson from '../../package.json';
 
 const getMMKVDirectory = () =>
   Platform.select({
-    ios: `${RNFS.LibraryDirectoryPath}/mmkv`,
-    android: `${RNFS.DocumentDirectoryPath}/mmkv`,
+    ios: `${RNFS.LibraryDirectoryPath}/${pkgJson.name}-mmkv`,
+    android: `${RNFS.DocumentDirectoryPath}/${pkgJson.name}-mmkv`,
   });
 
 const MMKV_DIRECTORY = getMMKVDirectory();
