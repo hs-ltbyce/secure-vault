@@ -1725,13 +1725,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eva-design/material@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@eva-design/material@npm:2.2.0"
-  checksum: 04b35c6090a56d97223e0d293d5ddf94c46283f165e93327dc426920fe9d6ee82b3564904fbe8239fcde3f087bd8be30a43afaee5df9a4a1d63a750902e722bd
-  languageName: node
-  linkType: hard
-
 "@eva-design/processor@npm:^2.2.0":
   version: 2.2.0
   resolution: "@eva-design/processor@npm:2.2.0"
@@ -9666,7 +9659,6 @@ __metadata:
     "@babel/runtime": ^7.20.0
     "@eslint/js": ^9.9.0
     "@eva-design/eva": ^2.2.0
-    "@eva-design/material": ^2.2.0
     "@react-native-masked-view/masked-view": ^0.3.1
     "@react-native/babel-preset": 0.74.83
     "@react-native/eslint-config": 0.74.83

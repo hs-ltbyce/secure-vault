@@ -1,4 +1,4 @@
-import * as material from '@eva-design/material';
+import * as eva from '@eva-design/eva';
 import { ApplicationProvider } from '@ui-kitten/components';
 import { createContext, useEffect, useState } from 'react';
 import { Appearance } from 'react-native';
@@ -53,7 +53,7 @@ function ThemeProviderEva({
 
   return (
     <ThemeContext.Provider value={{ theme, changeTheme }}>
-      <ApplicationProvider {...material} theme={material[theme]}>
+      <ApplicationProvider {...eva} theme={eva[theme]}>
         {children}
       </ApplicationProvider>
     </ThemeContext.Provider>
