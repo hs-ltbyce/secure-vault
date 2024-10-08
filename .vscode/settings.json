@@ -6,6 +6,7 @@
     "mockjs",
     "reactotron",
     "rneui",
+    "RNFS",
     "tanstack"
   ]
 }
