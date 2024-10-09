@@ -6,7 +6,6 @@ import { Example, Startup } from '@/screens';
 
 import AccountList from '@/screens/account-list/account-list';
 import AccountSetting from '@/screens/account-list/account-setting';
-import DrawerMenu from '@/screens/drawer-menu/drawer-menu';
 import DarkModeSetting from '@/screens/setting/dark-setting';
 import GeneralSetting from '@/screens/setting/general-setting';
 import LanguageSetting from '@/screens/setting/language-setting';
@@ -29,7 +28,6 @@ function ApplicationNavigator() {
           <Stack.Screen name="LanguageSetting" component={LanguageSetting} />
           <Stack.Screen name="DarkModeSetting" component={DarkModeSetting} />
         </Stack.Navigator>
-        <DrawerMenu />
       </NavigationContainer>
     </SafeAreaProvider>
   );

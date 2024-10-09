@@ -10,18 +10,23 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 import { useTranslation } from 'react-i18next';
-import { useMMKVBoolean } from 'react-native-mmkv';
 
-function DrawerMenu() {
+type Props = {
+  open: boolean;
+  onClose: () => void;
+};
+
+function DrawerMenu(props: Props) {
+  const { open, onClose } = props;
+
   const { t } = useTranslation('common');
   const styles = useStyleSheet(themedStyles);
 
-  const [open, setOpen] = useMMKVBoolean('drawerMenu.open');
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   return (
-    <Drawer style={styles.container} open={open} onClose={() => setOpen(false)}>
-      <Menu style={styles.menu} onSelect={() => setOpen(false)}>
+    <Drawer style={styles.container} open={open} onClose={onClose}>
+      <Menu style={styles.menu} onSelect={onClose}>
         <MenuItem
           title={t('setting.title')}
           accessoryLeft={SettingIcon}

@@ -13,14 +13,14 @@ import { TouchableWebElement } from '@ui-kitten/components/devsupport';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, StyleSheet } from 'react-native';
-import { useMMKVBoolean } from 'react-native-mmkv';
+import DrawerMenu from '../drawer-menu/drawer-menu';
 
 function AccountList() {
   const { t } = useTranslation(['common']);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const [accountList, setAccountList] = useState<AccountInfo[]>([]);
-  const [, setOpen] = useMMKVBoolean('drawerMenu.open');
+  const [open, setOpen] = useState<boolean>(false);
 
   const renderRightActions = (): TouchableWebElement => (
     <TopNavigationAction
@@ -55,6 +55,7 @@ function AccountList() {
         )}
         ListEmptyComponent={<Empty style={styles.empty} />}
       />
+      <DrawerMenu open={open} onClose={() => setOpen(false)} />
     </ScreenView>
   );
 }
