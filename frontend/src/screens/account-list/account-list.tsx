@@ -8,11 +8,15 @@ import { RootStackParamList } from '@/types/navigation';
 import { Account as AccountInfo } from '@/types/schemas/account';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { TopNavigationAction } from '@ui-kitten/components';
+import {
+  StyleService,
+  TopNavigationAction,
+  useStyleSheet,
+} from '@ui-kitten/components';
 import { TouchableWebElement } from '@ui-kitten/components/devsupport';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
 import DrawerMenu from '../drawer-menu/drawer-menu';
 
 function AccountList() {
@@ -21,6 +25,7 @@ function AccountList() {
 
   const [accountList, setAccountList] = useState<AccountInfo[]>([]);
   const [open, setOpen] = useState<boolean>(false);
+  const styles = useStyleSheet(themedStyles);
 
   const renderRightActions = (): TouchableWebElement => (
     <TopNavigationAction
@@ -53,14 +58,16 @@ function AccountList() {
         renderItem={({ item }) => (
           <Account style={styles.account} account={item} />
         )}
-        ListEmptyComponent={<Empty style={styles.empty} />}
+        ListEmptyComponent={
+          <Empty style={styles.empty} descStyle={styles.descStyle} />
+        }
       />
       <DrawerMenu open={open} onClose={() => setOpen(false)} />
     </ScreenView>
   );
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   listEmpty: {
     flexGrow: 1,
     justifyContent: 'center',
@@ -70,6 +77,9 @@ const styles = StyleSheet.create({
   },
   empty: {
     marginBottom: 64,
+  },
+  descStyle: {
+    color: 'text-basic-color',
   },
 });
 
