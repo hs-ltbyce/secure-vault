@@ -41,7 +41,6 @@ const themedStyles = StyleService.create({
     backgroundColor: 'background-basic-color-1',
   },
   menu: {
-    top: 40,
     flex: 1,
     backgroundColor: 'background-basic-color-1',
   },
