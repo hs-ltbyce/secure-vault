@@ -6,7 +6,7 @@ export interface Account {
   createTime: string | undefined;
   updateTime: string | undefined;
   remark: string | undefined;
-  email: string[] | undefined;
+  email: string | undefined;
   weChat: string | undefined;
   qq: string | undefined;
   phone: string | undefined;
