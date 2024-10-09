@@ -37,3 +37,11 @@ export function ArrowIOSForwardIcon(props: IconProps) {
 export function BellIcon(props: IconProps) {
   return <Icon name="bell-outline" {...props} />;
 }
+
+export function EyeOffIcon(props: IconProps) {
+  return <Icon name="eye-off" {...props} />;
+}
+
+export function EyeIcon(props: IconProps) {
+  return <Icon name="eye" {...props} />;
+}

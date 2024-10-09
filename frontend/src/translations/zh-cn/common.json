@@ -2,8 +2,25 @@
   "appName": "安密库",
   "appNameDesc": "安密库，您的密码管家",
   "empty": "暂无数据",
+  "saveBtnText": "保存",
+  "deleteBtnText": "删除",
+  "cancelBtnText": "取消",
+  "inputPlaceholder": "请输入",
+  "selectPlaceholder": "请选择",
   "keyList": {
-    "title": "列表"
+    "title": "列表",
+    "setting": {
+      "title": "新建",
+      "advanceTitle": "高级",
+      "accountTitle": "标题",
+      "account": "账号",
+      "password": "密码",
+      "remark": "备注",
+      "weChat": "微信号",
+      "email": "邮箱",
+      "phone": "手机号",
+      "qq": "QQ号"
+    }
   },
   "setting": {
     "title": "设置"

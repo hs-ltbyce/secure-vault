@@ -2,6 +2,7 @@ import type { StackScreenProps } from '@react-navigation/stack';
 
 export type RootStackParamList = {
   AccountList: undefined;
+  AccountSetting: undefined;
   Startup: undefined;
   Example: undefined;
   Setting: undefined;

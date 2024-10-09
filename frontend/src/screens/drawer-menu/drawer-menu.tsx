@@ -33,9 +33,6 @@ function DrawerMenu() {
 }
 
 const themedStyles = StyleService.create({
-  backdrop: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
   container: {
     width: '60%',
     backgroundColor: 'background-basic-color-1',

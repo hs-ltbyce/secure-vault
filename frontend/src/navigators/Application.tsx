@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Example, Startup } from '@/screens';
 
 import AccountList from '@/screens/account-list/account-list';
+import AccountSetting from '@/screens/account-list/account-setting';
 import DrawerMenu from '@/screens/drawer-menu/drawer-menu';
 import DarkModeSetting from '@/screens/setting/dark-setting';
 import GeneralSetting from '@/screens/setting/general-setting';
@@ -20,6 +21,7 @@ function ApplicationNavigator() {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="AccountList" component={AccountList} />
+          <Stack.Screen name="AccountSetting" component={AccountSetting} />
           <Stack.Screen name="Startup" component={Startup} />
           <Stack.Screen name="Example" component={Example} />
           <Stack.Screen name="Setting" component={Setting} />

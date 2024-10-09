@@ -4,7 +4,10 @@ import { MenuIcon, PlusIcon } from '@/components/icons/icons';
 import ScreenTopNavigation from '@/components/screen-top-navigation/screen-top-navigation';
 import { mockAccountList } from '@/data/mock/account';
 import ScreenView from '@/theme/screen-view';
+import { RootStackParamList } from '@/types/navigation';
 import { Account as AccountInfo } from '@/types/schemas/account';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { TopNavigationAction } from '@ui-kitten/components';
 import { TouchableWebElement } from '@ui-kitten/components/devsupport';
 import { useEffect, useState } from 'react';
@@ -14,11 +17,16 @@ import { useMMKVBoolean } from 'react-native-mmkv';
 
 function AccountList() {
   const { t } = useTranslation(['common']);
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
   const [accountList, setAccountList] = useState<AccountInfo[]>([]);
   const [, setOpen] = useMMKVBoolean('drawerMenu.open');
 
   const renderRightActions = (): TouchableWebElement => (
-    <TopNavigationAction icon={PlusIcon} />
+    <TopNavigationAction
+      icon={PlusIcon}
+      onPress={() => navigation.navigate('AccountSetting')}
+    />
   );
 
   const renderMenuAction = (): TouchableWebElement => (

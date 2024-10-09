@@ -2,8 +2,25 @@
   "appName": "Secure Vault",
   "appNameDesc": "Secure Vault,your password manager",
   "empty": "No data available",
+  "saveBtnText": "Save",
+  "deleteBtnText": "Delete",
+  "cancelBtnText": "Cancel",
+  "inputPlaceholder": "Please enter",
+  "selectPlaceholder": "Please select",
   "keyList": {
-    "title": "List"
+    "title": "List",
+    "setting": {
+      "title": "Create",
+      "advanceTitle": "Advance",
+      "accountTitle": "Title",
+      "account": "Account",
+      "password": "Password",
+      "remark": "Remark",
+      "weChat": "WeChat",
+      "email": "Email",
+      "phone": "Phone",
+      "qq": "QQ"
+    }
   },
   "setting": {
     "title": "Setting"
