@@ -8,10 +8,10 @@ export function mockAccountList(count: number): Account[] {
       id: Mock.Random.guid(),
       title: Mock.Random.ctitle(2, 4),
       account: Mock.Random.email(),
-      pwd: Mock.Random.string(8, 16),
+      password: Mock.Random.string(8, 16),
       createTime: Mock.Random.date('yyyy-MM-dd HH:mm:ss'),
       updateTime: Mock.Random.date('yyyy-MM-dd HH:mm:ss'),
-      note: Mock.Random.csentence(10, 30) || null,
+      remark: Mock.Random.csentence(10, 30),
     };
 
     accounts.push(accountData);

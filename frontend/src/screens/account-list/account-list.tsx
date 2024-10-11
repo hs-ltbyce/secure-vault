@@ -16,16 +16,20 @@ import {
 import { TouchableWebElement } from '@ui-kitten/components/devsupport';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList } from 'react-native';
+import { View } from 'react-native';
+import DraggableFlatList, {
+  RenderItemParams,
+  ScaleDecorator,
+} from 'react-native-draggable-flatlist';
 import DrawerMenu from '../drawer-menu/drawer-menu';
 
 function AccountList() {
   const { t } = useTranslation(['common']);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
-  const [accountList, setAccountList] = useState<AccountInfo[]>([]);
   const [open, setOpen] = useState<boolean>(false);
   const styles = useStyleSheet(themedStyles);
+  const [accountList, setAccountList] = useState<AccountInfo[]>([]);
 
   const renderRightActions = (): TouchableWebElement => (
     <TopNavigationAction
@@ -36,6 +40,17 @@ function AccountList() {
 
   const renderMenuAction = (): TouchableWebElement => (
     <TopNavigationAction icon={MenuIcon} onPress={() => setOpen(true)} />
+  );
+
+  const renderItem = ({ item, drag }: RenderItemParams<AccountInfo>) => (
+    <ScaleDecorator>
+      <Account
+        onPress={(item) => console.log(item)}
+        onLongPress={drag}
+        style={styles.account}
+        account={item}
+      />
+    </ScaleDecorator>
   );
 
   useEffect(() => {
@@ -50,18 +65,17 @@ function AccountList() {
         accessoryLeft={renderMenuAction}
         accessoryRight={renderRightActions}
       />
-      <FlatList
-        contentContainerStyle={
-          accountList.length === 0 ? styles.listEmpty : null
-        }
-        data={accountList}
-        renderItem={({ item }) => (
-          <Account style={styles.account} account={item} />
-        )}
-        ListEmptyComponent={
-          <Empty style={styles.empty} descStyle={styles.descStyle} />
-        }
-      />
+      <View style={accountList.length === 0 ? styles.listEmpty : null}>
+        <DraggableFlatList<AccountInfo>
+          data={accountList}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          onDragEnd={({ data }) => setAccountList(data)}
+          ListEmptyComponent={
+            <Empty style={styles.empty} descStyle={styles.descStyle} />
+          }
+        />
+      </View>
       <DrawerMenu open={open} onClose={() => setOpen(false)} />
     </ScreenView>
   );
@@ -69,7 +83,7 @@ function AccountList() {
 
 const themedStyles = StyleService.create({
   listEmpty: {
-    flexGrow: 1,
+    flex: 1,
     justifyContent: 'center',
   },
   account: {

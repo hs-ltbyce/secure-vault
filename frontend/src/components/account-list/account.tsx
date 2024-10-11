@@ -1,25 +1,34 @@
 import { Account as AccountInfo } from '@/types/schemas/account';
 import { Card, Text } from '@ui-kitten/components';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import {
+  GestureResponderEvent,
+  StyleProp,
+  StyleSheet,
+  ViewStyle,
+} from 'react-native';
 
 function Account(props: {
   account: AccountInfo;
+  onPress?: (account: AccountInfo, e: GestureResponderEvent) => void;
+  onLongPress?: () => void;
   style?: StyleProp<ViewStyle>;
 }) {
-  const { account, style } = props;
+  const { account, style, onPress, onLongPress } = props;
   return (
-    <View style={style}>
-      <Card>
-        <Text category="h6" style={styles.title}>
-          {account.title}
+    <Card
+      onLongPress={onLongPress}
+      onPress={(e) => onPress?.(account, e)}
+      style={style}
+    >
+      <Text category="h6" style={styles.title}>
+        {account.title}
+      </Text>
+      {account.remark ? (
+        <Text numberOfLines={1} ellipsizeMode="tail" category="c1">
+          {account.remark}
         </Text>
-        {account.note ? (
-          <Text numberOfLines={1} ellipsizeMode="tail" category="c1">
-            {account.note}
-          </Text>
-        ) : null}
-      </Card>
-    </View>
+      ) : null}
+    </Card>
   );
 }
 
