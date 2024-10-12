@@ -6,9 +6,9 @@ import {
 } from '@/components/icons/icons';
 import ScreenTopNavigation from '@/components/screen-top-navigation/screen-top-navigation';
 import ScreenView from '@/theme/screen-view';
-import { RootStackParamList } from '@/types/navigation';
+import { NavigationParams, RootStackParamList } from '@/types/navigation';
 import { Account } from '@/types/schemas/account';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import {
   Button,
@@ -16,22 +16,30 @@ import {
   Input,
   TopNavigationAction,
 } from '@ui-kitten/components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { useMMKVString } from 'react-native-mmkv';
+import uuid from 'react-native-uuid';
 import AccountAdvanceSetting from './acc-adv-set';
 
 function AccountSetting() {
   const { t } = useTranslation(['common']);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const { params: routeParams } =
+    useRoute<NavigationParams<'AccountSetting'>>();
+  const [, setAccountList] = useMMKVString('accountList');
   const [open, setOpen] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const {
     control,
+    reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<Account>();
+  } = useForm<Account>({
+    defaultValues: routeParams?.account || {},
+  });
 
   const renderIcon = (props: IconProps): React.ReactElement => (
     <TouchableWithoutFeedback onPress={() => setSecureTextEntry((s) => !s)}>
@@ -39,9 +47,47 @@ function AccountSetting() {
     </TouchableWithoutFeedback>
   );
 
-  const onSubmit = (data: Account) => {
-    console.log(data);
+  const addRecord = (data: Account) => {
+    setAccountList((current = '[]') => {
+      const dataList = JSON.parse(current);
+      dataList.push({
+        ...data,
+        id: uuid.v4(),
+      });
+      return JSON.stringify(dataList);
+    });
   };
+
+  const updateRecord = (data: Account) => {
+    setAccountList((current = '[]') => {
+      const dataList = JSON.parse(current).map((m: Account) => {
+        if (m.id === data.id) return data;
+        return m;
+      });
+      return JSON.stringify(dataList);
+    });
+  };
+
+  const onDeleteRecord = (id: string) => {
+    setAccountList((current = '[]') => {
+      const dataList = JSON.parse(current).filter((f: Account) => f.id !== id);
+      return JSON.stringify(dataList);
+    });
+    navigation.goBack();
+  };
+
+  const onSubmit = (data: Account) => {
+    if (data.id) {
+      updateRecord(data);
+    } else {
+      addRecord(data);
+    }
+    navigation.goBack();
+  };
+
+  useEffect(() => {
+    if (routeParams?.account) reset(routeParams.account);
+  }, [routeParams?.account, reset]);
 
   return (
     <ScreenView>
@@ -127,7 +173,17 @@ function AccountSetting() {
             )}
           />
         </View>
-        <Button onPress={handleSubmit(onSubmit)}>{t('saveBtnText')}</Button>
+        <View style={styles.bottomBtnGroup}>
+          <Button onPress={handleSubmit(onSubmit)}>{t('saveBtnText')}</Button>
+          {routeParams?.account.id && (
+            <Button
+              status="danger"
+              onPress={() => onDeleteRecord(routeParams.account.id)}
+            >
+              {t('deleteBtnText')}
+            </Button>
+          )}
+        </View>
       </View>
       <AccountAdvanceSetting open={open} onClose={() => setOpen(false)} />
     </ScreenView>
@@ -145,6 +201,9 @@ const styles = StyleSheet.create({
   },
   textArea: {
     minHeight: 64,
+  },
+  bottomBtnGroup: {
+    gap: 10,
   },
 });
 

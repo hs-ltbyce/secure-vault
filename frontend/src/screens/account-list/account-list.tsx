@@ -2,7 +2,6 @@ import Account from '@/components/account-list/account';
 import Empty from '@/components/common/empty';
 import { MenuIcon, PlusIcon } from '@/components/icons/icons';
 import ScreenTopNavigation from '@/components/screen-top-navigation/screen-top-navigation';
-import { mockAccountList } from '@/data/mock/account';
 import ScreenView from '@/theme/screen-view';
 import { RootStackParamList } from '@/types/navigation';
 import { Account as AccountInfo } from '@/types/schemas/account';
@@ -14,13 +13,14 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 import { TouchableWebElement } from '@ui-kitten/components/devsupport';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import DraggableFlatList, {
   RenderItemParams,
   ScaleDecorator,
 } from 'react-native-draggable-flatlist';
+import { useMMKVString } from 'react-native-mmkv';
 import DrawerMenu from '../drawer-menu/drawer-menu';
 
 function AccountList() {
@@ -29,7 +29,11 @@ function AccountList() {
 
   const [open, setOpen] = useState<boolean>(false);
   const styles = useStyleSheet(themedStyles);
-  const [accountList, setAccountList] = useState<AccountInfo[]>([]);
+  const [accountListStr, setAccountList] = useMMKVString('accountList');
+
+  const accountList: AccountInfo[] = accountListStr
+    ? JSON.parse(accountListStr)
+    : [];
 
   const renderRightActions = (): TouchableWebElement => (
     <TopNavigationAction
@@ -42,20 +46,26 @@ function AccountList() {
     <TopNavigationAction icon={MenuIcon} onPress={() => setOpen(true)} />
   );
 
-  const renderItem = ({ item, drag }: RenderItemParams<AccountInfo>) => (
+  const renderItem = ({
+    item,
+    drag,
+    isActive,
+  }: RenderItemParams<AccountInfo>) => (
     <ScaleDecorator>
-      <Account
-        onPress={(item) => console.log(item)}
-        onLongPress={drag}
-        style={styles.account}
-        account={item}
-      />
+      <TouchableOpacity onLongPress={drag} disabled={isActive}>
+        <Account
+          onPress={() =>
+            navigation.navigate('AccountSetting', {
+              account: item,
+            })
+          }
+          onLongPress={drag}
+          style={styles.account}
+          account={item}
+        />
+      </TouchableOpacity>
     </ScaleDecorator>
   );
-
-  useEffect(() => {
-    setAccountList(mockAccountList(10));
-  }, []);
 
   return (
     <ScreenView>
@@ -70,7 +80,11 @@ function AccountList() {
           data={accountList}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
-          onDragEnd={({ data }) => setAccountList(data)}
+          onDragEnd={({ data }) => {
+            setTimeout(() => {
+              setAccountList(JSON.stringify(data));
+            }, 0);
+          }}
           ListEmptyComponent={
             <Empty style={styles.empty} descStyle={styles.descStyle} />
           }
