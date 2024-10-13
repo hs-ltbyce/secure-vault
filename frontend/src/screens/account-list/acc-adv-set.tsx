@@ -42,7 +42,9 @@ function AccountAdvanceSetting(props: Props) {
         title={t('keyList.setting.advanceTitle')}
         alignment="center"
         accessoryLeft={() => (
-          <Button appearance="ghost">{t('cancelBtnText')}</Button>
+          <Button onPress={onClose} appearance="ghost">
+            {t('cancelBtnText')}
+          </Button>
         )}
         accessoryRight={() => (
           <Button appearance="ghost">{t('saveBtnText')}</Button>
