@@ -1,4 +1,5 @@
 import Account from '@/components/account-list/account';
+import CreateAccountDrawer from '@/components/account-list/create-account-drawer';
 import Empty from '@/components/common/empty';
 import { MenuIcon, PlusIcon } from '@/components/icons/icons';
 import ScreenTopNavigation from '@/components/screen-top-navigation/screen-top-navigation';
@@ -21,13 +22,15 @@ import DraggableFlatList, {
   ScaleDecorator,
 } from 'react-native-draggable-flatlist';
 import { useMMKVString } from 'react-native-mmkv';
+import uuid from 'react-native-uuid';
 import DrawerMenu from '../drawer-menu/drawer-menu';
 
 function AccountList() {
   const { t } = useTranslation(['common']);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
-  const [open, setOpen] = useState<boolean>(false);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [openRight, setOpenRight] = useState<boolean>(false);
   const styles = useStyleSheet(themedStyles);
   const [accountListStr, setAccountList] = useMMKVString('accountList');
 
@@ -36,14 +39,11 @@ function AccountList() {
     : [];
 
   const renderRightActions = (): TouchableWebElement => (
-    <TopNavigationAction
-      icon={PlusIcon}
-      onPress={() => navigation.navigate('AccountSetting')}
-    />
+    <TopNavigationAction icon={PlusIcon} onPress={() => setOpenRight(true)} />
   );
 
   const renderMenuAction = (): TouchableWebElement => (
-    <TopNavigationAction icon={MenuIcon} onPress={() => setOpen(true)} />
+    <TopNavigationAction icon={MenuIcon} onPress={() => setOpenMenu(true)} />
   );
 
   const renderItem = ({
@@ -66,6 +66,20 @@ function AccountList() {
       </TouchableOpacity>
     </ScaleDecorator>
   );
+
+  const handleAddSubmit = (
+    data: Pick<AccountInfo, 'account' | 'password' | 'title'>,
+  ) => {
+    setAccountList((current = '[]') => {
+      const dataList = JSON.parse(current);
+      dataList.push({
+        ...data,
+        id: uuid.v4(),
+      });
+      return JSON.stringify(dataList);
+    });
+    setOpenRight(false);
+  };
 
   return (
     <ScreenView>
@@ -90,7 +104,13 @@ function AccountList() {
           }
         />
       </View>
-      <DrawerMenu open={open} onClose={() => setOpen(false)} />
+      <DrawerMenu open={openMenu} onClose={() => setOpenMenu(false)} />
+      <CreateAccountDrawer
+        open={openRight}
+        style={styles.createAccountStyle}
+        onClose={() => setOpenRight(false)}
+        onSave={handleAddSubmit}
+      />
     </ScreenView>
   );
 }
@@ -108,6 +128,10 @@ const themedStyles = StyleService.create({
   },
   descStyle: {
     color: 'text-basic-color',
+  },
+  createAccountStyle: {
+    backgroundColor: 'background-basic-color-1',
+    height: '100%',
   },
 });
 

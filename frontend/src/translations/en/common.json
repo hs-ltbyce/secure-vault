@@ -7,11 +7,13 @@
   "cancelBtnText": "Cancel",
   "inputPlaceholder": "Please enter",
   "selectPlaceholder": "Please select",
+  "prevStep": "Prev",
+  "nextStep": "Next",
   "keyList": {
     "title": "List",
     "setting": {
       "title": "Create",
-      "advanceTitle": "Advance",
+      "editTitle": "Edit",
       "accountTitle": "Title",
       "account": "Account",
       "password": "Password",

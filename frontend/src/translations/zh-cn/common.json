@@ -7,11 +7,13 @@
   "cancelBtnText": "取消",
   "inputPlaceholder": "请输入",
   "selectPlaceholder": "请选择",
+  "prevStep": "上一步",
+  "nextStep": "下一步",
   "keyList": {
     "title": "列表",
     "setting": {
       "title": "新建",
-      "advanceTitle": "高级",
+      "editTitle": "编辑",
       "accountTitle": "标题",
       "account": "账号",
       "password": "密码",
