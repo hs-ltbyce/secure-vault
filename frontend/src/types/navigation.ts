@@ -4,11 +4,9 @@ import { Account } from './schemas/account';
 
 export type RootStackParamList = {
   AccountList: undefined;
-  AccountSetting:
-    | undefined
-    | {
-        account: Account;
-      };
+  AccountSetting: {
+    account: Account;
+  };
   Startup: undefined;
   Example: undefined;
   Setting: undefined;
