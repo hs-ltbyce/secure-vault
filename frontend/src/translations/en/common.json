@@ -9,10 +9,12 @@
   "selectPlaceholder": "Please select",
   "prevStep": "Prev",
   "nextStep": "Next",
+  "improveInfo": "Go and improve",
+  "unknownError": "Unknown Error",
   "keyList": {
     "title": "List",
     "setting": {
-      "title": "Create",
+      "title": "Edit",
       "editTitle": "Edit",
       "accountTitle": "Title",
       "account": "Account",

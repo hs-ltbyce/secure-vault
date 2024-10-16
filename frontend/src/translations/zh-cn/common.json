@@ -9,10 +9,12 @@
   "selectPlaceholder": "请选择",
   "prevStep": "上一步",
   "nextStep": "下一步",
+  "improveInfo": "去完善",
+  "unknownError": "未知错误",
   "keyList": {
     "title": "列表",
     "setting": {
-      "title": "新建",
+      "title": "编辑资料",
       "editTitle": "编辑",
       "accountTitle": "标题",
       "account": "账号",
