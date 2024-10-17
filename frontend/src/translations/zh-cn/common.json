@@ -15,9 +15,8 @@
   "keyList": {
     "title": "列表",
     "setting": {
-      "title": "编辑资料",
-      "editTitle": "编辑",
-      "accountTitle": "标题",
+      "screenTitle": "编辑资料",
+      "title": "标题",
       "account": "账号",
       "password": "密码",
       "remark": "备注",

@@ -26,7 +26,8 @@ function AccountSetting() {
   const { account: accountData } = routeParams;
   const [accountInfo, setAccountInfo] = useState<Account>(accountData);
   const [, setAccountList] = useMMKVString('accountList');
-  const [editFieldName, setEditFieldName] = useState<keyof Account>();
+  const [editFieldName, setEditFieldName] =
+    useState<keyof Omit<Account, 'id' | 'createTime' | 'updateTime'>>();
 
   const updateRecord = (data: Account) => {
     setAccountList((current = '[]') => {
@@ -64,7 +65,7 @@ function AccountSetting() {
     <ScreenView style={{ backgroundColor: token['background-basic-color-1'] }}>
       <ScreenTopNavigation
         style={{ backgroundColor: 'transparent' }}
-        title={t('keyList.setting.title')}
+        title={t('keyList.setting.screenTitle')}
         alignment="center"
         accessoryLeft={() => (
           <TopNavigationAction
@@ -76,7 +77,7 @@ function AccountSetting() {
       <View style={styles.container}>
         <View>
           <AccountSettingItem
-            label={t('keyList.setting.accountTitle')}
+            label={t('keyList.setting.title')}
             text={accountInfo.title}
             accessoryRight={
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />

@@ -17,12 +17,14 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
+type FieldName = keyof Omit<Account, 'id' | 'createTime' | 'updateTime'>;
+
 type Props = {
-  fieldName: keyof Account | undefined;
+  fieldName: FieldName | undefined;
   initialFieldValue: Account[keyof Account];
   open: boolean;
   onClose: () => void;
-  onSave: (fieldName: keyof Account, value: Account[keyof Account]) => void;
+  onSave: (fieldName: FieldName, value: Account[FieldName]) => void;
 };
 function AccountEditDrawer(props: Props) {
   const { open, initialFieldValue, fieldName, onClose, onSave } = props;
@@ -30,6 +32,10 @@ function AccountEditDrawer(props: Props) {
   const styles = useStyleSheet(themedStyles);
   const [value, setValue] =
     useState<Props['initialFieldValue']>(initialFieldValue);
+
+  const title = fieldName
+    ? `${t('common:edit')}${t(`keyList.setting.${fieldName}`)}`
+    : t('common:edit');
 
   const getContent = (fieldName: Props['fieldName']) => {
     switch (fieldName) {
@@ -68,7 +74,7 @@ function AccountEditDrawer(props: Props) {
       onClose={onClose}
     >
       <ScreenTopNavigation
-        title={`${t('common:edit')}`}
+        title={title}
         style={{ backgroundColor: 'transparent' }}
         alignment="center"
         accessoryLeft={() => (

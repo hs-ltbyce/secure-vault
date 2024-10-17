@@ -15,9 +15,8 @@
   "keyList": {
     "title": "List",
     "setting": {
-      "title": "Edit",
-      "editTitle": "Edit",
-      "accountTitle": "Title",
+      "screenTitle": "Edit",
+      "title": "Title",
       "account": "Account",
       "password": "Password",
       "remark": "Remark",
