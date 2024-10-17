@@ -11,11 +11,10 @@ import { Account } from '@/types/schemas/account';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Button, TopNavigationAction } from '@ui-kitten/components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { useMMKVString } from 'react-native-mmkv';
-import uuid from 'react-native-uuid';
 import AccountEditDrawer from './account-edit-drawer';
 
 function AccountSetting() {
@@ -25,19 +24,9 @@ function AccountSetting() {
   const { params: routeParams } =
     useRoute<NavigationParams<'AccountSetting'>>();
   const { account: accountData } = routeParams;
+  const [accountInfo, setAccountInfo] = useState<Account>(accountData);
   const [, setAccountList] = useMMKVString('accountList');
   const [editFieldName, setEditFieldName] = useState<keyof Account>();
-
-  const addRecord = (data: Account) => {
-    setAccountList((current = '[]') => {
-      const dataList = JSON.parse(current);
-      dataList.push({
-        ...data,
-        id: uuid.v4(),
-      });
-      return JSON.stringify(dataList);
-    });
-  };
 
   const updateRecord = (data: Account) => {
     setAccountList((current = '[]') => {
@@ -57,14 +46,19 @@ function AccountSetting() {
     navigation.goBack();
   };
 
-  const onSubmit = (data: Account) => {
-    if (data.id) {
-      updateRecord(data);
-    } else {
-      addRecord(data);
-    }
-    navigation.goBack();
+  const handleOnCloseEdit = () => {
+    setEditFieldName(undefined);
   };
+
+  const onSubmit = (data: Account) => {
+    updateRecord(data);
+    setAccountInfo(data);
+    handleOnCloseEdit();
+  };
+
+  useEffect(() => {
+    setAccountInfo(accountData);
+  }, [accountData]);
 
   return (
     <ScreenView style={{ backgroundColor: token['background-basic-color-1'] }}>
@@ -83,7 +77,7 @@ function AccountSetting() {
         <View>
           <AccountSettingItem
             label={t('keyList.setting.accountTitle')}
-            text={accountData.title}
+            text={accountInfo.title}
             accessoryRight={
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
             }
@@ -91,7 +85,7 @@ function AccountSetting() {
           />
           <AccountSettingItem
             label={t('keyList.setting.account')}
-            text={accountData.account}
+            text={accountInfo.account}
             accessoryRight={
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
             }
@@ -99,7 +93,7 @@ function AccountSetting() {
           />
           <AccountSettingItem
             label={t('keyList.setting.password')}
-            text={accountData.password}
+            text={accountInfo.password}
             accessoryRight={
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
             }
@@ -107,7 +101,7 @@ function AccountSetting() {
           />
           <AccountSettingItem
             label={t('keyList.setting.phone')}
-            text={accountData.phone}
+            text={accountInfo.phone}
             placeholder={t('improveInfo')}
             accessoryRight={
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
@@ -116,7 +110,7 @@ function AccountSetting() {
           />
           <AccountSettingItem
             label={t('keyList.setting.email')}
-            text={accountData.email}
+            text={accountInfo.email}
             placeholder={t('improveInfo')}
             accessoryRight={
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
@@ -126,7 +120,7 @@ function AccountSetting() {
           <AccountSettingItem
             label={t('keyList.setting.remark')}
             placeholder={t('improveInfo')}
-            text={accountData.remark}
+            text={accountInfo.remark}
             accessoryRight={
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
             }
@@ -135,7 +129,7 @@ function AccountSetting() {
           <AccountSettingItem
             label={t('keyList.setting.weChat')}
             placeholder={t('improveInfo')}
-            text={accountData.weChat}
+            text={accountInfo.weChat}
             accessoryRight={
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
             }
@@ -144,7 +138,7 @@ function AccountSetting() {
           <AccountSettingItem
             label={t('keyList.setting.qq')}
             placeholder={t('improveInfo')}
-            text={accountData.qq}
+            text={accountInfo.qq}
             accessoryRight={
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
             }
@@ -160,12 +154,15 @@ function AccountSetting() {
           </Button>
         </View>
         <AccountEditDrawer
-          fileName={editFieldName}
-          initialFileValue={
-            editFieldName ? accountData[editFieldName] : undefined
+          fieldName={editFieldName}
+          initialFieldValue={
+            editFieldName ? accountInfo[editFieldName] : undefined
           }
           open={!!editFieldName}
-          onClose={() => setEditFieldName(undefined)}
+          onClose={handleOnCloseEdit}
+          onSave={(fieldName, value) =>
+            onSubmit({ ...accountInfo, [fieldName]: value })
+          }
         />
       </View>
     </ScreenView>

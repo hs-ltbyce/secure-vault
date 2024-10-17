@@ -13,33 +13,34 @@ import {
   Text,
   useStyleSheet,
 } from '@ui-kitten/components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
 type Props = {
-  fileName: keyof Account | undefined;
-  initialFileValue: Account[keyof Account];
+  fieldName: keyof Account | undefined;
+  initialFieldValue: Account[keyof Account];
   open: boolean;
   onClose: () => void;
+  onSave: (fieldName: keyof Account, value: Account[keyof Account]) => void;
 };
 function AccountEditDrawer(props: Props) {
-  const { open, initialFileValue, fileName, onClose } = props;
+  const { open, initialFieldValue, fieldName, onClose, onSave } = props;
   const { t } = useTranslation(['common']);
   const styles = useStyleSheet(themedStyles);
-  const [fileValue, setFileValue] =
-    useState<Props['initialFileValue']>(initialFileValue);
+  const [value, setValue] =
+    useState<Props['initialFieldValue']>(initialFieldValue);
 
-  const getContent = (fileName: Props['fileName']) => {
-    switch (fileName) {
+  const getContent = (fieldName: Props['fieldName']) => {
+    switch (fieldName) {
       case 'title':
-        return <AccountTitle value={fileValue} setValue={setFileValue} />;
+        return <AccountTitle value={value} setValue={setValue} />;
       case 'account':
-        return <AccountName value={fileValue} setValue={setFileValue} />;
+        return <AccountName value={value} setValue={setValue} />;
       case 'password':
-        return <AccountPassword value={fileValue} setValue={setFileValue} />;
+        return <AccountPassword value={value} setValue={setValue} />;
       case 'remark':
-        return <AccountRemark value={fileValue} setValue={setFileValue} />;
+        return <AccountRemark value={value} setValue={setValue} />;
       default:
         return (
           <View
@@ -51,6 +52,14 @@ function AccountEditDrawer(props: Props) {
     }
   };
 
+  const handleOnSave = () => {
+    if (fieldName) onSave(fieldName, value);
+  };
+
+  useEffect(() => {
+    setValue(initialFieldValue);
+  }, [initialFieldValue]);
+
   return (
     <Drawer
       placement="bottom"
@@ -59,6 +68,7 @@ function AccountEditDrawer(props: Props) {
       onClose={onClose}
     >
       <ScreenTopNavigation
+        title={`${t('common:edit')}`}
         style={{ backgroundColor: 'transparent' }}
         alignment="center"
         accessoryLeft={() => (
@@ -67,10 +77,12 @@ function AccountEditDrawer(props: Props) {
           </Button>
         )}
         accessoryRight={() => (
-          <Button appearance="ghost">{t('saveBtnText')}</Button>
+          <Button onPress={handleOnSave} appearance="ghost">
+            {t('saveBtnText')}
+          </Button>
         )}
       />
-      {getContent(fileName)}
+      {getContent(fieldName)}
     </Drawer>
   );
 }
