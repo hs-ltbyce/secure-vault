@@ -24,7 +24,7 @@ function Account(props: {
         {account.title}
       </Text>
       {account.remark ? (
-        <Text numberOfLines={1} ellipsizeMode="tail" category="c1">
+        <Text numberOfLines={1} ellipsizeMode="tail" appearance="hint">
           {account.remark}
         </Text>
       ) : null}

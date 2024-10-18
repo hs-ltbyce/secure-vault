@@ -91,6 +91,7 @@ function AccountList() {
       />
       <View style={accountList.length === 0 ? styles.listEmpty : null}>
         <DraggableFlatList<AccountInfo>
+          style={styles.listContainer}
           data={accountList}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
@@ -120,8 +121,13 @@ const themedStyles = StyleService.create({
     flex: 1,
     justifyContent: 'center',
   },
+  listContainer: {
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
   account: {
-    marginTop: 8,
+    marginBottom: 6,
+    borderRadius: 16,
   },
   empty: {
     marginBottom: 64,
