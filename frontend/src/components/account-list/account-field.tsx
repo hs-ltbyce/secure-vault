@@ -85,3 +85,83 @@ export function AccountRemark(props: {
     />
   );
 }
+
+export function AccountEmail(props: {
+  value: string | undefined;
+  setValue: (text: string) => void;
+  size?: 'small' | 'medium' | 'large';
+  label?: InputProps['label'];
+  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+}) {
+  const { t } = useTranslation(['common']);
+  return (
+    <Input
+      label={props.label}
+      placeholder={t('inputPlaceholder')}
+      value={props.value}
+      size={props.size ?? 'medium'}
+      onChangeText={(nextValue) => props.setValue(nextValue)}
+      onBlur={props.onBlur}
+    />
+  );
+}
+
+export function AccountPhone(props: {
+  value: string | undefined;
+  setValue: (text: string) => void;
+  size?: 'small' | 'medium' | 'large';
+  label?: InputProps['label'];
+  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+}) {
+  const { t } = useTranslation(['common']);
+  return (
+    <Input
+      label={props.label}
+      placeholder={t('inputPlaceholder')}
+      value={props.value}
+      size={props.size ?? 'medium'}
+      onChangeText={(nextValue) => props.setValue(nextValue)}
+      onBlur={props.onBlur}
+    />
+  );
+}
+
+export function AccountQQ(props: {
+  value: string | undefined;
+  setValue: (text: string) => void;
+  size?: 'small' | 'medium' | 'large';
+  label?: InputProps['label'];
+  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+}) {
+  const { t } = useTranslation(['common']);
+  return (
+    <Input
+      label={props.label}
+      placeholder={t('inputPlaceholder')}
+      value={props.value}
+      size={props.size ?? 'medium'}
+      onChangeText={(nextValue) => props.setValue(nextValue)}
+      onBlur={props.onBlur}
+    />
+  );
+}
+
+export function AccountWeChat(props: {
+  value: string | undefined;
+  setValue: (text: string) => void;
+  size?: 'small' | 'medium' | 'large';
+  label?: InputProps['label'];
+  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+}) {
+  const { t } = useTranslation(['common']);
+  return (
+    <Input
+      label={props.label}
+      placeholder={t('inputPlaceholder')}
+      value={props.value}
+      size={props.size ?? 'medium'}
+      onChangeText={(nextValue) => props.setValue(nextValue)}
+      onBlur={props.onBlur}
+    />
+  );
+}

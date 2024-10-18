@@ -1,8 +1,12 @@
 import {
+  AccountEmail,
   AccountName,
   AccountPassword,
+  AccountPhone,
+  AccountQQ,
   AccountRemark,
   AccountTitle,
+  AccountWeChat,
 } from '@/components/account-list/account-field';
 import Drawer from '@/components/drawer/drawer';
 import ScreenTopNavigation from '@/components/screen-top-navigation/screen-top-navigation';
@@ -47,6 +51,14 @@ function AccountEditDrawer(props: Props) {
         return <AccountPassword value={value} setValue={setValue} />;
       case 'remark':
         return <AccountRemark value={value} setValue={setValue} />;
+      case 'email':
+        return <AccountEmail value={value} setValue={setValue} />;
+      case 'phone':
+        return <AccountPhone value={value} setValue={setValue} />;
+      case 'qq':
+        return <AccountQQ value={value} setValue={setValue} />;
+      case 'weChat':
+        return <AccountWeChat value={value} setValue={setValue} />;
       default:
         return (
           <View
