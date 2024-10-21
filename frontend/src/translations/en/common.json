@@ -16,6 +16,7 @@
     "title": "List",
     "setting": {
       "screenTitle": "Edit",
+      "create": "Create",
       "title": "Title",
       "account": "Account",
       "password": "Password",

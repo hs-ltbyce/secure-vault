@@ -1,6 +1,6 @@
 import { Account } from '@/types/schemas/account';
 import { Button, ViewPager } from '@ui-kitten/components';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View, ViewStyle } from 'react-native';
 import Drawer from '../drawer/drawer';
@@ -22,6 +22,24 @@ function CreateAccountDrawer(props: Props) {
   const [accountName, setAccountName] = useState<Account['account']>('');
   const [password, setPassword] = useState<Account['password']>('');
 
+  const disableRight = useMemo(() => {
+    if (selectedIndex === 0) return title.trim().length == 0;
+    if (selectedIndex === 1) return accountName.trim().length == 0;
+    return password.trim().length == 0;
+  }, [selectedIndex, title, accountName, password]);
+
+  const handleClickRight = (selectedIndex: number) => {
+    if (selectedIndex === 2) {
+      onSave({
+        title,
+        account: accountName,
+        password,
+      });
+    } else {
+      setSelectedIndex((s) => s + 1);
+    }
+  };
+
   const resetState = () => {
     setSelectedIndex(0);
     setTitle('');
@@ -42,7 +60,7 @@ function CreateAccountDrawer(props: Props) {
     >
       <ScreenTopNavigation
         style={{ backgroundColor: 'transparent' }}
-        title={t('keyList.setting.title')}
+        title={t('keyList.setting.create')}
         alignment="center"
         accessoryLeft={() =>
           selectedIndex === 0 ? (
@@ -58,29 +76,15 @@ function CreateAccountDrawer(props: Props) {
             </Button>
           )
         }
-        accessoryRight={() =>
-          selectedIndex === 2 ? (
-            <Button
-              onPress={() =>
-                onSave({
-                  title,
-                  account: accountName,
-                  password,
-                })
-              }
-              appearance="ghost"
-            >
-              {t('saveBtnText')}
-            </Button>
-          ) : (
-            <Button
-              onPress={() => setSelectedIndex((s) => s + 1)}
-              appearance="ghost"
-            >
-              {t('nextStep')}
-            </Button>
-          )
-        }
+        accessoryRight={() => (
+          <Button
+            onPress={() => handleClickRight(selectedIndex)}
+            appearance="ghost"
+            disabled={disableRight}
+          >
+            {selectedIndex === 2 ? t('saveBtnText') : t('nextStep')}
+          </Button>
+        )}
       />
       <ViewPager
         selectedIndex={selectedIndex}
@@ -91,18 +95,21 @@ function CreateAccountDrawer(props: Props) {
           <AccountTitle
             value={title}
             setValue={(nextTitle) => setTitle(nextTitle)}
+            label={t('common:keyList.setting.title')}
           />
         </View>
         <View>
           <AccountName
             value={accountName}
             setValue={(nextName) => setAccountName(nextName)}
+            label={t('common:keyList.setting.account')}
           />
         </View>
         <View>
           <AccountPassword
             value={password}
             setValue={(nextPassword) => setPassword(nextPassword)}
+            label={t('common:keyList.setting.password')}
           />
         </View>
       </ViewPager>

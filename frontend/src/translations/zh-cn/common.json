@@ -16,6 +16,7 @@
     "title": "列表",
     "setting": {
       "screenTitle": "编辑资料",
+      "create": "新建",
       "title": "标题",
       "account": "账号",
       "password": "密码",
