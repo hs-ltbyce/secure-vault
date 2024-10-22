@@ -16,7 +16,7 @@ import {
 import { TouchableWebElement } from '@ui-kitten/components/devsupport';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TouchableOpacity, View } from 'react-native';
+import { Keyboard, TouchableOpacity, View } from 'react-native';
 import DraggableFlatList, {
   RenderItemParams,
   ScaleDecorator,
@@ -79,6 +79,7 @@ function AccountList() {
       return JSON.stringify(dataList);
     });
     setOpenRight(false);
+    Keyboard.dismiss();
   };
 
   return (
@@ -109,7 +110,10 @@ function AccountList() {
       <CreateAccountDrawer
         open={openRight}
         style={styles.createAccountStyle}
-        onClose={() => setOpenRight(false)}
+        onClose={() => {
+          setOpenRight(false);
+          Keyboard.dismiss();
+        }}
         onSave={handleAddSubmit}
       />
     </ScreenView>

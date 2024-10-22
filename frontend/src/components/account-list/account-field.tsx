@@ -1,167 +1,120 @@
 import { Input, InputProps } from '@ui-kitten/components';
+import { ForwardedRef, forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NativeSyntheticEvent, TextInputFocusEventData } from 'react-native';
 
-export function AccountTitle(props: {
-  value: string | undefined;
-  setValue: (text: string) => void;
-  label?: InputProps['label'];
-  size?: 'small' | 'medium' | 'large';
-  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-}) {
-  const { t } = useTranslation(['common']);
-  return (
-    <Input
-      label={props.label}
-      placeholder={t('inputPlaceholder')}
-      value={props.value}
-      size={props.size ?? 'medium'}
-      onChangeText={(nextValue) => props.setValue(nextValue)}
-      onBlur={props.onBlur}
-    />
-  );
-}
+export const AccountTitle = forwardRef(
+  (props: InputProps, ref?: ForwardedRef<Input>) => {
+    const { t } = useTranslation(['common']);
+    return (
+      <Input
+        {...props}
+        ref={ref}
+        placeholder={t('inputPlaceholder')}
+        size={props.size ?? 'medium'}
+      />
+    );
+  },
+);
 
-export function AccountName(props: {
-  value: string | undefined;
-  setValue: (text: string) => void;
-  size?: 'small' | 'medium' | 'large';
-  label?: InputProps['label'];
-  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-}) {
-  const { t } = useTranslation(['common']);
-  return (
-    <Input
-      label={props.label}
-      placeholder={t('inputPlaceholder')}
-      value={props.value}
-      size={props.size ?? 'medium'}
-      onChangeText={(nextValue) => props.setValue(nextValue)}
-      onBlur={props.onBlur}
-    />
-  );
-}
+export const AccountName = forwardRef(
+  (props: InputProps, ref?: ForwardedRef<Input>) => {
+    const { t } = useTranslation(['common']);
+    return (
+      <Input
+        {...props}
+        ref={ref}
+        placeholder={t('inputPlaceholder')}
+        size={props.size ?? 'medium'}
+      />
+    );
+  },
+);
 
-export function AccountPassword(props: {
-  value: string | undefined;
-  setValue: (text: string) => void;
-  size?: 'small' | 'medium' | 'large';
-  label?: InputProps['label'];
-  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-}) {
-  const { t } = useTranslation(['common']);
-  return (
-    <Input
-      label={props.label}
-      placeholder={t('inputPlaceholder')}
-      value={props.value}
-      size={props.size ?? 'medium'}
-      onChangeText={(nextValue) => props.setValue(nextValue)}
-      onBlur={props.onBlur}
-    />
-  );
-}
+export const AccountPassword = forwardRef(
+  (props: InputProps, ref?: ForwardedRef<Input>) => {
+    const { t } = useTranslation(['common']);
+    return (
+      <Input
+        {...props}
+        ref={ref}
+        placeholder={t('inputPlaceholder')}
+        size={props.size ?? 'medium'}
+      />
+    );
+  },
+);
 
-export function AccountRemark(props: {
-  value: string | undefined;
-  setValue: (text: string) => void;
-  size?: 'small' | 'medium' | 'large';
-  label?: InputProps['label'];
-  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-}) {
-  const { t } = useTranslation(['common']);
-  return (
-    <Input
-      label={props.label}
-      textStyle={{
-        minHeight: 64,
-      }}
-      value={props.value}
-      placeholder={t('inputPlaceholder')}
-      size={props.size ?? 'medium'}
-      onChangeText={(nextValue) => props.setValue(nextValue)}
-      onBlur={props.onBlur}
-      multiline={true}
-    />
-  );
-}
+export const AccountRemark = forwardRef(
+  (props: InputProps, ref?: ForwardedRef<Input>) => {
+    const { t } = useTranslation(['common']);
+    return (
+      <Input
+        {...props}
+        ref={ref}
+        textStyle={{
+          minHeight: 64,
+        }}
+        placeholder={t('inputPlaceholder')}
+        size={props.size ?? 'medium'}
+        multiline={true}
+      />
+    );
+  },
+);
 
-export function AccountEmail(props: {
-  value: string | undefined;
-  setValue: (text: string) => void;
-  size?: 'small' | 'medium' | 'large';
-  label?: InputProps['label'];
-  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-}) {
-  const { t } = useTranslation(['common']);
-  return (
-    <Input
-      label={props.label}
-      placeholder={t('inputPlaceholder')}
-      value={props.value}
-      size={props.size ?? 'medium'}
-      onChangeText={(nextValue) => props.setValue(nextValue)}
-      onBlur={props.onBlur}
-    />
-  );
-}
+export const AccountEmail = forwardRef(
+  (props: InputProps, ref?: ForwardedRef<Input>) => {
+    const { t } = useTranslation(['common']);
+    return (
+      <Input
+        {...props}
+        ref={ref}
+        label={props.label}
+        placeholder={t('inputPlaceholder')}
+        size={props.size ?? 'medium'}
+      />
+    );
+  },
+);
 
-export function AccountPhone(props: {
-  value: string | undefined;
-  setValue: (text: string) => void;
-  size?: 'small' | 'medium' | 'large';
-  label?: InputProps['label'];
-  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-}) {
-  const { t } = useTranslation(['common']);
-  return (
-    <Input
-      label={props.label}
-      placeholder={t('inputPlaceholder')}
-      value={props.value}
-      size={props.size ?? 'medium'}
-      onChangeText={(nextValue) => props.setValue(nextValue)}
-      onBlur={props.onBlur}
-    />
-  );
-}
+export const AccountPhone = forwardRef(
+  (props: InputProps, ref?: ForwardedRef<Input>) => {
+    const { t } = useTranslation(['common']);
+    return (
+      <Input
+        {...props}
+        ref={ref}
+        placeholder={t('inputPlaceholder')}
+        size={props.size ?? 'medium'}
+      />
+    );
+  },
+);
 
-export function AccountQQ(props: {
-  value: string | undefined;
-  setValue: (text: string) => void;
-  size?: 'small' | 'medium' | 'large';
-  label?: InputProps['label'];
-  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-}) {
-  const { t } = useTranslation(['common']);
-  return (
-    <Input
-      label={props.label}
-      placeholder={t('inputPlaceholder')}
-      value={props.value}
-      size={props.size ?? 'medium'}
-      onChangeText={(nextValue) => props.setValue(nextValue)}
-      onBlur={props.onBlur}
-    />
-  );
-}
+export const AccountQQ = forwardRef(
+  (props: InputProps, ref?: ForwardedRef<Input>) => {
+    const { t } = useTranslation(['common']);
+    return (
+      <Input
+        {...props}
+        ref={ref}
+        placeholder={t('inputPlaceholder')}
+        size={props.size ?? 'medium'}
+      />
+    );
+  },
+);
 
-export function AccountWeChat(props: {
-  value: string | undefined;
-  setValue: (text: string) => void;
-  size?: 'small' | 'medium' | 'large';
-  label?: InputProps['label'];
-  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-}) {
-  const { t } = useTranslation(['common']);
-  return (
-    <Input
-      label={props.label}
-      placeholder={t('inputPlaceholder')}
-      value={props.value}
-      size={props.size ?? 'medium'}
-      onChangeText={(nextValue) => props.setValue(nextValue)}
-      onBlur={props.onBlur}
-    />
-  );
-}
+export const AccountWeChat = forwardRef(
+  (props: InputProps, ref?: ForwardedRef<Input>) => {
+    const { t } = useTranslation(['common']);
+    return (
+      <Input
+        {...props}
+        ref={ref}
+        placeholder={t('inputPlaceholder')}
+        size={props.size ?? 'medium'}
+      />
+    );
+  },
+);

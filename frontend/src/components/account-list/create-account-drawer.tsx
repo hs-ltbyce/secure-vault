@@ -1,8 +1,14 @@
 import { Account } from '@/types/schemas/account';
-import { Button, ViewPager } from '@ui-kitten/components';
-import { useEffect, useMemo, useState } from 'react';
+import { Button, Input, ViewPager } from '@ui-kitten/components';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet, View, ViewStyle } from 'react-native';
+import {
+  Keyboard,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+  ViewStyle,
+} from 'react-native';
 import Drawer from '../drawer/drawer';
 import ScreenTopNavigation from '../screen-top-navigation/screen-top-navigation';
 import { AccountName, AccountPassword, AccountTitle } from './account-field';
@@ -21,6 +27,9 @@ function CreateAccountDrawer(props: Props) {
   const [title, setTitle] = useState<Account['title']>('');
   const [accountName, setAccountName] = useState<Account['account']>('');
   const [password, setPassword] = useState<Account['password']>('');
+  const titleRef = useRef<Input>(null);
+  const nameRef = useRef<Input>(null);
+  const passwordRef = useRef<Input>(null);
 
   const disableRight = useMemo(() => {
     if (selectedIndex === 0) return title.trim().length == 0;
@@ -48,6 +57,17 @@ function CreateAccountDrawer(props: Props) {
   };
 
   useEffect(() => {
+    if (!open) return;
+    if (selectedIndex === 0 && titleRef.current) {
+      titleRef.current.focus();
+    } else if (selectedIndex === 1 && nameRef.current) {
+      nameRef.current.focus();
+    } else if (selectedIndex === 2 && passwordRef.current) {
+      passwordRef.current.focus();
+    }
+  }, [selectedIndex, open]);
+
+  useEffect(() => {
     if (open) resetState();
   }, [open]);
 
@@ -58,61 +78,72 @@ function CreateAccountDrawer(props: Props) {
       onClose={onClose}
       placement="bottom"
     >
-      <ScreenTopNavigation
-        style={{ backgroundColor: 'transparent' }}
-        title={t('keyList.setting.create')}
-        alignment="center"
-        accessoryLeft={() =>
-          selectedIndex === 0 ? (
-            <Button status="basic" onPress={onClose} appearance="ghost">
-              {t('cancelBtnText')}
-            </Button>
-          ) : (
-            <Button
-              onPress={() => setSelectedIndex((s) => s - 1)}
-              appearance="ghost"
-            >
-              {t('prevStep')}
-            </Button>
-          )
-        }
-        accessoryRight={() => (
-          <Button
-            onPress={() => handleClickRight(selectedIndex)}
-            appearance="ghost"
-            disabled={disableRight}
-          >
-            {selectedIndex === 2 ? t('saveBtnText') : t('nextStep')}
-          </Button>
-        )}
-      />
-      <ViewPager
-        selectedIndex={selectedIndex}
-        onSelect={(index) => setSelectedIndex(index)}
-        style={styles.tabContainer}
+      <TouchableWithoutFeedback
+        onPress={() => {
+          Keyboard.dismiss();
+        }}
       >
-        <View>
-          <AccountTitle
-            value={title}
-            setValue={(nextTitle) => setTitle(nextTitle)}
-            label={t('common:keyList.setting.title')}
+        <View style={{ flex: 1 }}>
+          <ScreenTopNavigation
+            style={{ backgroundColor: 'transparent' }}
+            title={t('keyList.setting.create')}
+            alignment="center"
+            accessoryLeft={() =>
+              selectedIndex === 0 ? (
+                <Button status="basic" onPress={onClose} appearance="ghost">
+                  {t('cancelBtnText')}
+                </Button>
+              ) : (
+                <Button
+                  onPress={() => setSelectedIndex((s) => s - 1)}
+                  appearance="ghost"
+                >
+                  {t('prevStep')}
+                </Button>
+              )
+            }
+            accessoryRight={() => (
+              <Button
+                onPress={() => handleClickRight(selectedIndex)}
+                appearance="ghost"
+                disabled={disableRight}
+              >
+                {selectedIndex === 2 ? t('saveBtnText') : t('nextStep')}
+              </Button>
+            )}
           />
+          <ViewPager
+            selectedIndex={selectedIndex}
+            onSelect={(index) => setSelectedIndex(index)}
+            style={styles.tabContainer}
+          >
+            <View>
+              <AccountTitle
+                value={title}
+                onChangeText={(nextTitle) => setTitle(nextTitle)}
+                label={t('common:keyList.setting.title')}
+                ref={titleRef}
+              />
+            </View>
+            <View>
+              <AccountName
+                value={accountName}
+                onChangeText={(nextName) => setAccountName(nextName)}
+                label={t('common:keyList.setting.account')}
+                ref={nameRef}
+              />
+            </View>
+            <View>
+              <AccountPassword
+                value={password}
+                onChangeText={(nextPassword) => setPassword(nextPassword)}
+                label={t('common:keyList.setting.password')}
+                ref={passwordRef}
+              />
+            </View>
+          </ViewPager>
         </View>
-        <View>
-          <AccountName
-            value={accountName}
-            setValue={(nextName) => setAccountName(nextName)}
-            label={t('common:keyList.setting.account')}
-          />
-        </View>
-        <View>
-          <AccountPassword
-            value={password}
-            setValue={(nextPassword) => setPassword(nextPassword)}
-            label={t('common:keyList.setting.password')}
-          />
-        </View>
-      </ViewPager>
+      </TouchableWithoutFeedback>
     </Drawer>
   );
 }
@@ -122,7 +153,6 @@ const styles = StyleSheet.create({
     padding: 0,
   },
   tabContainer: {
-    flex: 1,
     paddingHorizontal: 12,
     gap: 24,
   },
