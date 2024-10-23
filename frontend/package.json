@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@eva-design/eva": "^2.2.0",
+    "@react-native-clipboard/clipboard": "^1.14.2",
     "@react-native-masked-view/masked-view": "^0.3.1",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/stack": "^6.3.29",
@@ -83,5 +84,8 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "yarn@3.8.4"
+  "packageManager": "yarn@3.8.4",
+  "resolutions": {
+    "@react-native/codegen": "0.74.84"
+  }
 }
