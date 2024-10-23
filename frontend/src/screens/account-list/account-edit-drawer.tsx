@@ -44,21 +44,21 @@ function AccountEditDrawer(props: Props) {
   const getContent = (fieldName: Props['fieldName']) => {
     switch (fieldName) {
       case 'title':
-        return <AccountTitle value={value} setValue={setValue} />;
+        return <AccountTitle value={value} onChangeText={setValue} />;
       case 'account':
-        return <AccountName value={value} setValue={setValue} />;
+        return <AccountName value={value} onChangeText={setValue} />;
       case 'password':
-        return <AccountPassword value={value} setValue={setValue} />;
+        return <AccountPassword value={value} onChangeText={setValue} />;
       case 'remark':
-        return <AccountRemark value={value} setValue={setValue} />;
+        return <AccountRemark value={value} onChangeText={setValue} />;
       case 'email':
-        return <AccountEmail value={value} setValue={setValue} />;
+        return <AccountEmail value={value} onChangeText={setValue} />;
       case 'phone':
-        return <AccountPhone value={value} setValue={setValue} />;
+        return <AccountPhone value={value} onChangeText={setValue} />;
       case 'qq':
-        return <AccountQQ value={value} setValue={setValue} />;
+        return <AccountQQ value={value} onChangeText={setValue} />;
       case 'weChat':
-        return <AccountWeChat value={value} setValue={setValue} />;
+        return <AccountWeChat value={value} onChangeText={setValue} />;
       default:
         return (
           <View
@@ -107,7 +107,6 @@ function AccountEditDrawer(props: Props) {
 
 const themedStyles = StyleService.create({
   container: {
-    backgroundColor: 'background-basic-color-1',
     height: '70%',
   },
 });
