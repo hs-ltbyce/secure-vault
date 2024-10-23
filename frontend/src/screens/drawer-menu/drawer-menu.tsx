@@ -40,7 +40,6 @@ function DrawerMenu(props: Props) {
 const themedStyles = StyleService.create({
   container: {
     width: '60%',
-    backgroundColor: 'background-basic-color-1',
   },
   menu: {
     flex: 1,

@@ -1,3 +1,4 @@
+import { useTheme } from '@/theme';
 import {
   Dimensions,
   DimensionValue,
@@ -50,6 +51,7 @@ function Drawer(props: DrawerProps) {
     duration = 300,
     onClose,
   } = props;
+  const { token } = useTheme();
   const layout = useSharedValue(0);
   const insets = useSafeAreaInsets();
   const direction: Direction =
@@ -96,7 +98,7 @@ function Drawer(props: DrawerProps) {
     zIndex: 2,
     padding: 12,
     paddingTop: placement === 'bottom' ? 12 : insets.top + 12,
-    backgroundColor: 'white',
+    backgroundColor: token['background-basic-color-1'],
     top: placement === 'top' ? 0 : undefined,
     left: placement === 'left' ? 0 : undefined,
     right: placement === 'right' ? 0 : undefined,
