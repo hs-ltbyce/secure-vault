@@ -1,24 +1,34 @@
 import AccountSettingItem from '@/components/account-list/account-setting-item';
+import Drawer from '@/components/drawer/drawer';
 import {
   ArrowIOSBackIcon,
   ArrowIOSForwardIcon,
 } from '@/components/icons/icons';
+import ListGroup from '@/components/list-group/list-group';
 import ScreenTopNavigation from '@/components/screen-top-navigation/screen-top-navigation';
 import { useTheme } from '@/theme';
 import ScreenView from '@/theme/screen-view';
 import { NavigationParams, RootStackParamList } from '@/types/navigation';
 import { Account } from '@/types/schemas/account';
+import Clipboard from '@react-native-clipboard/clipboard';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { Button, TopNavigationAction } from '@ui-kitten/components';
+import {
+  Button,
+  StyleService,
+  Text,
+  TopNavigationAction,
+  useStyleSheet,
+} from '@ui-kitten/components';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { useMMKVString } from 'react-native-mmkv';
 import AccountEditDrawer from './account-edit-drawer';
 
 function AccountSetting() {
   const { token } = useTheme();
+  const themedStyles = useStyleSheet(styles);
   const { t } = useTranslation(['common']);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { params: routeParams } =
@@ -28,6 +38,7 @@ function AccountSetting() {
   const [, setAccountList] = useMMKVString('accountList');
   const [editFieldName, setEditFieldName] =
     useState<keyof Omit<Account, 'id' | 'createTime' | 'updateTime'>>();
+  const [openDelDrawer, setOpenDelDrawer] = useState(false);
 
   const updateRecord = (data: Account) => {
     setAccountList((current = '[]') => {
@@ -44,6 +55,7 @@ function AccountSetting() {
       const dataList = JSON.parse(current).filter((f: Account) => f.id !== id);
       return JSON.stringify(dataList);
     });
+    setOpenDelDrawer(false);
     navigation.goBack();
   };
 
@@ -55,6 +67,11 @@ function AccountSetting() {
     updateRecord(data);
     setAccountInfo(data);
     handleOnCloseEdit();
+  };
+
+  const handleClipboard = (text: string) => {
+    Clipboard.setString(text);
+    // todo: show toast
   };
 
   useEffect(() => {
@@ -74,7 +91,7 @@ function AccountSetting() {
           />
         )}
       />
-      <View style={styles.container}>
+      <View style={themedStyles.container}>
         <View>
           <AccountSettingItem
             label={t('keyList.setting.title')}
@@ -83,6 +100,7 @@ function AccountSetting() {
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
             }
             onPress={() => setEditFieldName('title')}
+            onLongPress={() => handleClipboard(accountInfo.title)}
           />
           <AccountSettingItem
             label={t('keyList.setting.account')}
@@ -91,6 +109,7 @@ function AccountSetting() {
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
             }
             onPress={() => setEditFieldName('account')}
+            onLongPress={() => handleClipboard(accountInfo.account)}
           />
           <AccountSettingItem
             label={t('keyList.setting.password')}
@@ -99,6 +118,7 @@ function AccountSetting() {
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
             }
             onPress={() => setEditFieldName('password')}
+            onLongPress={() => handleClipboard(accountInfo.password)}
           />
           <AccountSettingItem
             label={t('keyList.setting.phone')}
@@ -108,6 +128,9 @@ function AccountSetting() {
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
             }
             onPress={() => setEditFieldName('phone')}
+            onLongPress={() => {
+              if (accountInfo.phone) handleClipboard(accountInfo.phone);
+            }}
           />
           <AccountSettingItem
             label={t('keyList.setting.email')}
@@ -117,6 +140,9 @@ function AccountSetting() {
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
             }
             onPress={() => setEditFieldName('email')}
+            onLongPress={() => {
+              if (accountInfo.email) handleClipboard(accountInfo.email);
+            }}
           />
           <AccountSettingItem
             label={t('keyList.setting.remark')}
@@ -126,6 +152,9 @@ function AccountSetting() {
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
             }
             onPress={() => setEditFieldName('remark')}
+            onLongPress={() => {
+              if (accountInfo.remark) handleClipboard(accountInfo.remark);
+            }}
           />
           <AccountSettingItem
             label={t('keyList.setting.weChat')}
@@ -135,6 +164,9 @@ function AccountSetting() {
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
             }
             onPress={() => setEditFieldName('weChat')}
+            onLongPress={() => {
+              if (accountInfo.weChat) handleClipboard(accountInfo.weChat);
+            }}
           />
           <AccountSettingItem
             label={t('keyList.setting.qq')}
@@ -144,13 +176,13 @@ function AccountSetting() {
               <ArrowIOSForwardIcon style={{ width: 20, height: 20 }} />
             }
             onPress={() => setEditFieldName('qq')}
+            onLongPress={() => {
+              if (accountInfo.qq) handleClipboard(accountInfo.qq);
+            }}
           />
         </View>
         <View>
-          <Button
-            status="danger"
-            onPress={() => onDeleteRecord(routeParams.account.id)}
-          >
+          <Button status="danger" onPress={() => setOpenDelDrawer(true)}>
             {t('deleteBtnText')}
           </Button>
         </View>
@@ -165,16 +197,57 @@ function AccountSetting() {
             onSubmit({ ...accountInfo, [fieldName]: value })
           }
         />
+        <Drawer
+          placement="bottom"
+          open={openDelDrawer}
+          onClose={() => setOpenDelDrawer(false)}
+          style={themedStyles.delDrawer}
+        >
+          <ListGroup
+            items={[
+              {
+                key: 'delete',
+                items: [
+                  {
+                    key: 'deleteBtn',
+                    title: (evaProps) => (
+                      <Text
+                        {...evaProps}
+                        status="danger"
+                        style={{ textAlign: 'center' }}
+                      >{`${t('confirm')}${t('deleteBtnText')}`}</Text>
+                    ),
+                    onPress: () => onDeleteRecord(routeParams.account.id),
+                  },
+                  {
+                    key: 'cancelBtn',
+                    title: (evaProps) => (
+                      <Text {...evaProps} style={{ textAlign: 'center' }}>
+                        {t('cancelBtnText')}
+                      </Text>
+                    ),
+                    onPress: () => setOpenDelDrawer(false),
+                  },
+                ],
+              },
+            ]}
+          />
+        </Drawer>
       </View>
     </ScreenView>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleService.create({
   container: {
     paddingHorizontal: 12,
     justifyContent: 'space-between',
     flex: 1,
+  },
+  delDrawer: {
+    height: 120,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
   },
 });
 

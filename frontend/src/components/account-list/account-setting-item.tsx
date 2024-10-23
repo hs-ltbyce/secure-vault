@@ -8,12 +8,14 @@ function AccountSettingItem(props: {
   text?: string;
   accessoryRight?: ReactNode;
   placeholder?: string;
-  onPress: () => void;
+  onPress?: () => void;
+  onLongPress?: () => void;
 }) {
-  const { text, label, placeholder, accessoryRight, onPress } = props;
+  const { text, label, placeholder, accessoryRight, onLongPress, onPress } =
+    props;
   const { token } = useTheme();
   return (
-    <Pressable onPress={onPress}>
+    <Pressable onPress={onPress} onLongPress={onLongPress}>
       <View
         style={[
           styles.container,
