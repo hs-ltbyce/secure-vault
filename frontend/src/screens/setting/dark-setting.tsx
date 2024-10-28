@@ -4,11 +4,7 @@ import ScreenTopNavigation from '@/components/screen-top-navigation/screen-top-n
 import { useTheme } from '@/theme';
 import ScreenView from '@/theme/screen-view';
 import { useNavigation } from '@react-navigation/native';
-import {
-  Toggle,
-  ToggleProps,
-  TopNavigationAction,
-} from '@ui-kitten/components';
+import { Toggle, TopNavigationAction } from '@ui-kitten/components';
 import { useTranslation } from 'react-i18next';
 import { Appearance } from 'react-native';
 import { useMMKVBoolean } from 'react-native-mmkv';
@@ -19,7 +15,7 @@ function DarkModeSetting() {
   const { theme, changeTheme } = useTheme();
   const [useSystemTheme, setUseSystemTheme] = useMMKVBoolean('useSystemTheme');
 
-  const darkModeChange: ToggleProps['onChange'] = (checked) => {
+  const darkModeChange = (checked: boolean) => {
     const nextTheme = checked ? 'dark' : 'light';
     const systemTheme = Appearance.getColorScheme();
     if (systemTheme !== nextTheme && nextTheme === 'dark')
@@ -47,7 +43,7 @@ function DarkModeSetting() {
               {
                 key: 'darkMode',
                 title: t('darkModeSetting.title'),
-                accessoryRight: (
+                accessoryRight: () => (
                   <Toggle
                     status="primary"
                     checked={theme === 'dark'}
@@ -64,11 +60,11 @@ function DarkModeSetting() {
                 key: 'followSystem',
                 title: t('darkModeSetting.followSystem'),
                 description: t('darkModeSetting.followSystemDesc'),
-                accessoryRight: (
+                accessoryRight: () => (
                   <Toggle
+                    checked={!!useSystemTheme}
+                    onChange={setUseSystemTheme}
                     status="primary"
-                    checked={useSystemTheme}
-                    onChange={(checked) => setUseSystemTheme(checked)}
                   />
                 ),
               },

@@ -41,9 +41,7 @@ function ListGroup({ items }: Props) {
         <View style={styles.group} key={group.key}>
           {typeof group.title === 'string' ||
           typeof group.title === 'number' ? (
-            <Text style={styles.groupTitle} category="p2">
-              {group.title}
-            </Text>
+            <Text style={styles.groupTitle}>{group.title}</Text>
           ) : typeof group.title === 'function' ? (
             group.title()
           ) : (
