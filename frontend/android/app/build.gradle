@@ -83,6 +83,12 @@ android {
         versionName "1.0"
     }
     signingConfigs {
+        release {
+            storeFile file('./release-key')
+            storePassword 'buzhibujue2018'
+            keyAlias 'secure-vault-release-android'
+            keyPassword 'buzhibujue2018'
+        }
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'

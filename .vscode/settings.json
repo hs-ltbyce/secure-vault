@@ -10,5 +10,6 @@
     "rneui",
     "RNFS",
     "tanstack"
-  ]
+  ],
+  "java.configuration.updateBuildConfiguration": "interactive"
 }
