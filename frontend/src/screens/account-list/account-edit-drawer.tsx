@@ -75,8 +75,8 @@ function AccountEditDrawer(props: Props) {
   };
 
   useEffect(() => {
-    setValue(initialFieldValue);
-  }, [initialFieldValue]);
+    if (open) setValue(initialFieldValue);
+  }, [open, initialFieldValue]);
 
   return (
     <Drawer
