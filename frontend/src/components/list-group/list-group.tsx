@@ -47,14 +47,13 @@ function ListGroup({ items }: Props) {
           ) : (
             group.title
           )}
-          {
+          <View style={styles.listContainer}>
             <List
-              style={styles.list}
               data={group.items}
               ItemSeparatorComponent={Divider}
               renderItem={renderItem}
             />
-          }
+          </View>
         </View>
       ))}
     </View>
@@ -70,7 +69,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 8,
   },
-  list: {
+  listContainer: {
+    overflow: 'hidden',
     borderRadius: 8,
   },
 });
