@@ -15,6 +15,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ant-design/colors@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "@ant-design/colors@npm:7.1.0"
+  dependencies:
+    "@ctrl/tinycolor": ^3.6.1
+  checksum: 6488b4159cea52be8a904caf541064e9f0e267c1df74ed687abd9364e6cfeb0353c64ee078878069f48aa6c381feca2af17612efe0529517c0260f989472b7ae
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.12.13, @babel/code-frame@npm:^7.24.7":
   version: 7.24.7
   resolution: "@babel/code-frame@npm:7.24.7"
@@ -1927,6 +1936,20 @@ __metadata:
   version: 0.2.3
   resolution: "@bcoe/v8-coverage@npm:0.2.3"
   checksum: 850f9305536d0f2bd13e9e0881cb5f02e4f93fad1189f7b2d4bebf694e3206924eadee1068130d43c11b750efcc9405f88a8e42ef098b6d75239c0f047de1a27
+  languageName: node
+  linkType: hard
+
+"@ctrl/tinycolor@npm:^3.6.1":
+  version: 3.6.1
+  resolution: "@ctrl/tinycolor@npm:3.6.1"
+  checksum: cefec6fcaaa3eb8ddf193f981e097dccf63b97b93b1e861cb18c645654824c831a568f444996e15ee509f255658ed82fba11c5365494a6e25b9b12ac454099e0
+  languageName: node
+  linkType: hard
+
+"@ctrl/tinycolor@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@ctrl/tinycolor@npm:4.1.0"
+  checksum: 124016e1dbf0cb84c6f18a64a7fb64be37de01e8591ecf7090b9bbb0cf5bc0806c434feb36bf95c0556d53ffb1cd9b6ba13f27f0d2891db69debb3c1606e2791
   languageName: node
   linkType: hard
 
@@ -9977,9 +10000,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "secure-vault@workspace:."
   dependencies:
+    "@ant-design/colors": ^7.1.0
     "@babel/core": ^7.20.0
     "@babel/preset-env": ^7.20.0
     "@babel/runtime": ^7.20.0
+    "@ctrl/tinycolor": ^4.1.0
     "@eslint/js": ^9.9.0
     "@eva-design/eva": ^2.2.0
     "@react-native-clipboard/clipboard": ^1.14.2
