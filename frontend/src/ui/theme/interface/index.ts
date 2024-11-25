@@ -1,3 +1,12 @@
+export type { AliasToken } from './alias';
+export type {
+  FullToken,
+  GenStyleFn,
+  GetDefaultToken,
+  GlobalToken,
+  OverrideComponent,
+  OverrideToken,
+} from './cssinjs-utils';
 export type {
   ColorMapToken,
   ColorNeutralMapToken,

@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "@ant-design/colors": "^7.1.0",
+    "@ant-design/cssinjs": "^1.22.0",
+    "@ant-design/cssinjs-utils": "^1.1.1",
     "@ctrl/tinycolor": "^4.1.0",
     "@eva-design/eva": "^2.2.0",
     "@react-native-clipboard/clipboard": "^1.14.2",
