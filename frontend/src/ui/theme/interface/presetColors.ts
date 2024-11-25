@@ -4,7 +4,6 @@ export const PresetColors = [
   'cyan',
   'green',
   'magenta',
-  'pink',
   'red',
   'orange',
   'yellow',
@@ -30,4 +29,3 @@ export type LegacyColorPalettes = {
 export type ColorPalettes = {
   [key in `${keyof PresetColorType}${ColorPaletteKeyIndex}`]: string;
 };
-
