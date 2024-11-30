@@ -2,12 +2,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import AccountList from '@/screens/account-list/account-list';
-import AccountSetting from '@/screens/account-list/account-setting';
-import DarkModeSetting from '@/screens/setting/dark-setting';
-import GeneralSetting from '@/screens/setting/general-setting';
-import LanguageSetting from '@/screens/setting/language-setting';
-import Setting from '@/screens/setting/setting';
+import {
+  AccountList,
+  AccountSetting,
+  DarkModeSetting,
+  GeneralSetting,
+  LanguageSetting,
+  Setting,
+} from '@/screens';
 import type { RootStackParamList } from '@/types/navigation';
 
 const Stack = createStackNavigator<RootStackParamList>();
